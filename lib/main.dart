@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Invent APP',
-
       home: MyHomePage(),
     );
   }
@@ -29,4 +28,3 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold();
   }
 }
-
