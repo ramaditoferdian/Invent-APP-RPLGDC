@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/page/registerPageDosen.dart';
+import 'package:inventory_app/page/registerPageMahasiswa.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,8 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: MyHomePage(),
+
+      home: RegisterPageDosen(),
+
     );
   }
 }
