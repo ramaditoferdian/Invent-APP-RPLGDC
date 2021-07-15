@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/page/registerPage.dart';
-
 import 'package:inventory_app/screens/login_page.dart';
 
 void main() {
