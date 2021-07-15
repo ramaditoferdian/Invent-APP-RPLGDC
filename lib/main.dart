@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/screens/login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Invent APP',
+<<<<<<< Updated upstream
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -23,10 +25,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Invent APP'),
+=======
+      home: LoginPage(),
+>>>>>>> Stashed changes
     );
   }
 }
 
+<<<<<<< Updated upstream
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -111,3 +117,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+=======
+>>>>>>> Stashed changes
