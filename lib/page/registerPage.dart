@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,13 +7,23 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
-
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool validasiPassword = false;
+
+  String nama = '';
+  String email = '';
+  String nip = '';
+  String nim = '';
+  String jurusan = '';
+  String fakultas = '';
+  String password = '';
+
+  final _key = new GlobalKey<FormState>();
+
   /* 
     Boolean untuk mengetahui apakah saat ini berada pada
     Section Register sebagai DOSEN atau MAHASISWA 
@@ -30,11 +42,33 @@ class _RegisterPageState extends State<RegisterPage> {
   final fieldTextJurusan = TextEditingController();
   final fieldTextPassword = TextEditingController();
 
+  checkInputan() {
+    final form = _key.currentState;
+
+    if (form!.validate() && fieldTextPassword.text.length >= 8) {
+      form.save();
+      print('Nama : $nama');
+      print('Email : $email');
+      print('NIP : $nip');
+      print('NIM : $nim');
+      print('Jurusan : $jurusan');
+      print('Fakultas : $fakultas');
+      print('Password : $password');
+    } else {
+      // form.reset();
+      print(fieldTextPassword.text.length);
+    }
+  }
+
   /* 
     Prosedur untuk clear inputan jika pindah SECTION REGISTER 
     antara Dosen dan Mahasiswa
   */
   void clearInputan() {
+    final form = _key.currentState;
+
+    form!.reset();
+
     fieldTextNama.clear();
     fieldTextEmail.clear();
     fieldTextNIP.clear();
@@ -42,6 +76,14 @@ class _RegisterPageState extends State<RegisterPage> {
     fieldTextFakultas.clear();
     fieldTextJurusan.clear();
     fieldTextPassword.clear();
+
+    nama = '';
+    email = '';
+    nip = '';
+    nim = '';
+    jurusan = '';
+    fakultas = '';
+    password = '';
   }
 
   // Kumpulan widget
@@ -51,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(15, 35, 15, 0),
+          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -65,7 +107,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Nama Required';
+              }
+            },
+            onSaved: (value) {
+              nama = value.toString();
+            },
             controller: fieldTextNama,
             keyboardType: TextInputType.name,
             style: TextStyle(
@@ -108,7 +158,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Email Required';
+              }
+            },
+            onSaved: (value) {
+              email = value.toString();
+            },
             controller: fieldTextEmail,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -151,7 +209,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'NIP Required';
+              }
+            },
+            onSaved: (value) {
+              nip = value.toString();
+            },
             controller: fieldTextNIP,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -194,7 +260,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'NIM Required';
+              }
+            },
+            onSaved: (value) {
+              nim = value.toString();
+            },
             controller: fieldTextNIM,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -237,9 +311,17 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Jurusan Required';
+              }
+            },
+            onSaved: (value) {
+              jurusan = value.toString();
+            },
             controller: fieldTextJurusan,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             style: TextStyle(
               color: Colors.black87,
             ),
@@ -280,9 +362,17 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Fakultas Required';
+              }
+            },
+            onSaved: (value) {
+              fakultas = value.toString();
+            },
             controller: fieldTextFakultas,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             style: TextStyle(
               color: Colors.black87,
             ),
@@ -323,7 +413,24 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              // Melakukan cek apakah password lebih dari sama dengan 8 string
+              if (value!.length < 8) {
+                setState(() {
+                  validasiPassword = true;
+                  return null;
+                });
+              } else {
+                setState(() {
+                  validasiPassword = false;
+                });
+              }
+            },
+            onSaved: (value) {
+              password = value.toString();
+            },
+            obscureText: true,
             controller: fieldTextPassword,
             keyboardType: TextInputType.visiblePassword,
             style: TextStyle(
@@ -331,12 +438,18 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
+              contentPadding: EdgeInsets.only(left: 20, bottom: 5, top: 8),
               hintText: 'Password',
               hintStyle: GoogleFonts.poppins(
                 color: Colors.black38,
                 fontWeight: FontWeight.w400,
               ),
+              suffixIcon: validasiPassword
+                  ? Icon(
+                      Icons.error,
+                      color: Colors.black,
+                    )
+                  : null,
             ),
           ),
         )
@@ -363,7 +476,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                print("Tombol Sign Up ditekan");
+                checkInputan();
+              },
               child: Text(
                 "Sign Up",
                 style: GoogleFonts.poppins(
@@ -393,6 +509,7 @@ class _RegisterPageState extends State<RegisterPage> {
             GestureDetector(
               onTap: () {
                 setState(() {
+                  print("Lagi dihalaman daftar sebagai Dosen");
                   isDosen = true;
                   clearInputan();
                 });
@@ -424,6 +541,7 @@ class _RegisterPageState extends State<RegisterPage> {
             GestureDetector(
               onTap: () {
                 setState(() {
+                  print('Lagi dihalaman daftar sebagai Mahasiswa');
                   isDosen = false;
                   clearInputan();
                 });
@@ -473,19 +591,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 2,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                buildName(),
-                buildEmail(),
-                if (isDosen) buildNIP(),
-                if (!isDosen) buildNIM(),
-                if (!isDosen) buildJurusan(),
-                buildFakultas(),
-                buildPassword(),
-                buildSignUpButton(),
-              ],
+            child: Form(
+              key: _key,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  buildName(),
+                  buildEmail(),
+                  if (isDosen) buildNIP(),
+                  if (!isDosen) buildNIM(),
+                  if (!isDosen) buildJurusan(),
+                  buildFakultas(),
+                  buildPassword(),
+                  buildSignUpButton(),
+                ],
+              ),
             ),
           ),
         ),
