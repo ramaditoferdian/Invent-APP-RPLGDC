@@ -466,7 +466,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(
             height: 1.1 * (MediaQuery.of(context).size.height / 20),
             width: 3.5 * (MediaQuery.of(context).size.width / 10),
-            margin: EdgeInsets.only(bottom: 20),
+            //margin: EdgeInsets.only(bottom: 20),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
@@ -580,8 +580,8 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Container(
             margin: EdgeInsets.only(top: 40),
             height: isDosen
-                ? MediaQuery.of(context).size.height * 0.59
-                : MediaQuery.of(context).size.height * 0.67,
+                ? MediaQuery.of(context).size.height * 0.54
+                : MediaQuery.of(context).size.height * 0.63,
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
