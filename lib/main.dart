@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }
