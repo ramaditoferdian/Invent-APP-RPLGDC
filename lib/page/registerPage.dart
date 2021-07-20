@@ -594,7 +594,9 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         iconSize: 50,
         color: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
