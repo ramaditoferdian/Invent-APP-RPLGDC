@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,6 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
     fieldTextJurusan.clear();
     fieldTextPassword.clear();
 
+    validasiPassword = false;
+
     nama = '';
     email = '';
     nip = '';
@@ -89,377 +92,344 @@ class _RegisterPageState extends State<RegisterPage> {
   // Kumpulan widget
 
   Widget buildName() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Nama Required';
+          }
+        },
+        onSaved: (value) {
+          nama = value.toString();
+        },
+        controller: fieldTextNama,
+        keyboardType: TextInputType.name,
+        style: TextStyle(
+          color: Colors.black87,
+        ),
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Nama Required';
-              }
-            },
-            onSaved: (value) {
-              nama = value.toString();
-            },
-            controller: fieldTextNama,
-            keyboardType: TextInputType.name,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'Nama',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          hintText: 'Nama',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildEmail() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Email Required';
+          }
+        },
+        onSaved: (value) {
+          email = value.toString();
+        },
+        controller: fieldTextEmail,
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Email Required';
-              }
-            },
-            onSaved: (value) {
-              email = value.toString();
-            },
-            controller: fieldTextEmail,
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'Email',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          hintText: 'Email',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildNIP() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'NIP Required';
+          }
+        },
+        onSaved: (value) {
+          nip = value.toString();
+        },
+        controller: fieldTextNIP,
+        keyboardType: TextInputType.number,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'NIP Required';
-              }
-            },
-            onSaved: (value) {
-              nip = value.toString();
-            },
-            controller: fieldTextNIP,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'NIP',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          hintText: 'NIP',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildNIM() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'NIM Required';
+          }
+        },
+        onSaved: (value) {
+          nim = value.toString();
+        },
+        controller: fieldTextNIM,
+        keyboardType: TextInputType.number,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'NIM Required';
-              }
-            },
-            onSaved: (value) {
-              nim = value.toString();
-            },
-            controller: fieldTextNIM,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'NIM',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          hintText: 'NIM',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildJurusan() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Jurusan Required';
+          }
+        },
+        onSaved: (value) {
+          jurusan = value.toString();
+        },
+        controller: fieldTextJurusan,
+        keyboardType: TextInputType.text,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Jurusan Required';
-              }
-            },
-            onSaved: (value) {
-              jurusan = value.toString();
-            },
-            controller: fieldTextJurusan,
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'Jurusan',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          hintText: 'Jurusan',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildFakultas() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Fakultas Required';
+          }
+        },
+        onSaved: (value) {
+          fakultas = value.toString();
+        },
+        controller: fieldTextFakultas,
+        keyboardType: TextInputType.text,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
-          ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Fakultas Required';
-              }
-            },
-            onSaved: (value) {
-              fakultas = value.toString();
-            },
-            controller: fieldTextFakultas,
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5),
-              hintText: 'Fakultas',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+        textAlignVertical: TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(left: 20),
+          hintText: 'Fakultas',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget buildPassword() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 10,
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(23),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          )
+        ],
+      ),
+      height: 1.1 * (MediaQuery.of(context).size.height / 20),
+      child: TextFormField(
+        validator: (value) {
+          // Melakukan cek apakah password lebih dari sama dengan 8 string
+          if (value!.length < 8) {
+            setState(() {
+              validasiPassword = true;
+              return null;
+            });
+          } else {
+            setState(() {
+              validasiPassword = false;
+            });
+          }
+        },
+        onSaved: (value) {
+          password = value.toString();
+        },
+        obscureText: true,
+        controller: fieldTextPassword,
+        keyboardType: TextInputType.visiblePassword,
+        style: TextStyle(
+          color: Colors.black87,
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 0),
-              )
-            ],
+        textAlignVertical:
+            validasiPassword ? TextAlignVertical.center : TextAlignVertical.top,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(
+            left: 20,
           ),
-          height: 1.1 * (MediaQuery.of(context).size.height / 20),
-          child: TextFormField(
-            validator: (value) {
-              // Melakukan cek apakah password lebih dari sama dengan 8 string
-              if (value!.length < 8) {
-                setState(() {
-                  validasiPassword = true;
-                  return null;
-                });
-              } else {
-                setState(() {
-                  validasiPassword = false;
-                });
-              }
-            },
-            onSaved: (value) {
-              password = value.toString();
-            },
-            obscureText: true,
-            controller: fieldTextPassword,
-            keyboardType: TextInputType.visiblePassword,
-            style: TextStyle(
-              color: Colors.black87,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 20, bottom: 5, top: 8),
-              hintText: 'Password',
-              hintStyle: GoogleFonts.poppins(
-                color: Colors.black38,
-                fontWeight: FontWeight.w400,
-              ),
-              suffixIcon: validasiPassword
-                  ? Icon(
-                      Icons.error,
-                      color: Colors.black,
-                    )
-                  : null,
-            ),
+          hintText: 'Password',
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.black38,
+            fontWeight: FontWeight.w400,
           ),
-        )
-      ],
+          suffixIcon: validasiPassword
+              ? Icon(
+                  Icons.error,
+                  color: Colors.black,
+                )
+              : null,
+        ),
+      ),
     );
   }
 
   Widget buildSignUpButton() {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 40, 20, 0),
+      margin: EdgeInsets.fromLTRB(0, 30, 20, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
