@@ -587,7 +587,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget backButton() {
     return Container(
       //padding: EdgeInsets.all(50),
-      alignment: Alignment.topLeft,
+      alignment: Alignment.topLeft, // komen
       child: IconButton(
         icon: Icon(
           Icons.chevron_left,
