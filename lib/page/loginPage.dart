@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/registerPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -165,7 +166,13 @@ class _LoginPageState extends State<LoginPage> {
   
   Widget buildSignUpBtn() {
     return GestureDetector(
-      onTap: () => print('Sign up Pressed!'),
+      onTap: () {
+        Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegisterPage()),
+        );
+      },
       child: RichText(
         text: TextSpan(
           children: [
