@@ -136,9 +136,8 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RegisterPage()),
+          context,
+          MaterialPageRoute(builder: (context) => RegisterPage()),
         );
       },
       child: RichText(
@@ -208,7 +207,10 @@ class _LoginPageState extends State<LoginPage> {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color(0xFFFF9F69), Color(0x79FFB183)])),
+                      colors: [
+                    Color(0xFFFF9F69),
+                    Color(0x79FFB183),
+                  ])),
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 100),
@@ -219,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                       'Login',
                       style: GoogleFonts.poppins(
                           color: Colors.black,
-                          fontSize: 30,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
