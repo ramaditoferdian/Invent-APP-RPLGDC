@@ -174,6 +174,123 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       ),
     );
   }
+  
+  Widget menuCard() {
+    return GestureDetector(
+    onTap: (){
+      print('Menu Card');
+    },
+    child: Container(
+      height: MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width * 0.9, 
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset('images/mouse.png',
+                width: 80,
+                height: 80,),
+                SizedBox(
+                  width:5
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Text('Mouse Logitech LM145',
+                      style: GoogleFonts.roboto(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                      ),),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 80,
+                        ),
+                        Container(
+                          child: Column(
+                            children:<Widget>[
+                             Text('Quantity',
+                             style: GoogleFonts.roboto(
+                               fontWeight: FontWeight.w400,
+                               fontSize: 14,
+                               color: Color(0x8C000000)
+                             )),
+                             SizedBox(
+                               height: 10,
+                             ),
+                             Text('10 Unit',
+                             style: GoogleFonts.poppins(
+                               fontWeight: FontWeight.normal,
+                               fontSize: 14
+                             ),)
+                            ] 
+                          ),
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Container(
+                          child: Column(
+                            children:<Widget>[
+                             Text('Kondisi',
+                             style: GoogleFonts.roboto(
+                               fontWeight: FontWeight.w400,
+                               fontSize: 14,
+                               color: Color(0x8C000000)
+                             )),
+                             SizedBox(
+                               height: 10,
+                             ),
+                             Text('Good',
+                             style: GoogleFonts.poppins(
+                               fontWeight: FontWeight.normal,
+                               fontSize: 14
+                             ),)
+                            ] 
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(15, 0, 0, 75),
+              child: GestureDetector(
+                onTap: (){
+                  print('Triple Dots');
+                },
+                child: Icon(Icons.more_vert),
+              ),
+            )
+          ],  
+        ),
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -245,9 +362,43 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                   ),
                 ),
               ),
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 4,
+                ),
+                child: SingleChildScrollView(
+                   physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                   mainAxisAlignment: MainAxisAlignment.start,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: <Widget>[
+                     menuCard(),
+                     SizedBox(
+                       height: 10,
+                     ),
+                     menuCard(),
+                     SizedBox(
+                       height: 10,
+                     ),
+                     menuCard(),
+                     SizedBox(
+                       height: 10,
+                     ),
+                     menuCard(),
+                     SizedBox(
+                       height: 10,
+                     ),
+                     menuCard(),
+                   ],
+                )
+                )
+              )
               // TOMBOL BACK
             ],
           ),
+          
         ),
         floatingActionButton: Visibility(
           // Tamplikan Ketika berada pada Menu Data Barang
@@ -328,3 +479,214 @@ Widget iconSort() {
     ),
   );
 }
+
+
+// Nyoba-nyoba Card yang bagus
+
+// Widget menuCard(){
+//     return Card(
+//             clipBehavior: Clip.antiAlias,
+//             child: Container(
+//               height: 120,
+//               padding: const EdgeInsets.all(0),
+//               child: Row(children: [
+//                 Expanded(
+//                   flex: 5,
+//                   child: new Container(
+//                     decoration: new BoxDecoration(
+//                         image: new DecorationImage(
+//                             image: ExactAssetImage(
+//                                 'images/mouse.png'),
+//                             fit: BoxFit.fill)),
+//                   ),
+//                 ),
+//                 Spacer(
+//                   flex: 1,
+//                 ),
+//                 Expanded(
+//                   flex: 14,
+//                   child: Container(
+//                     // padding: const EdgeInsets.only(top),
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       mainAxisAlignment: MainAxisAlignment.end,
+//                       children: <Widget>[
+//                         Text("Mouse Logitech",
+//                             style: TextStyle(
+//                                 fontSize: 20.0, fontWeight: FontWeight.bold)),
+//                         Row(
+//                           children: <Widget>[
+//                             Text(
+//                               'Barcode : ',
+//                               style: TextStyle(fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               "barcode",
+//                               style: TextStyle(fontSize: 15.0),
+//                             ),
+//                           ],
+//                         ),
+//                         Row(
+//                           children: <Widget>[
+//                             Text(
+//                               'Harga : ',
+//                               style: TextStyle(
+//                                   fontWeight: FontWeight.bold, fontSize: 20),
+//                             ),
+//                             Text(
+//                               'harga',
+//                               style: TextStyle(fontSize: 20),
+//                             )
+//                           ],
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ]),
+//             ),
+//           );
+//   }
+
+ // Widget menuCard(){
+  //   return GestureDetector(
+  //     onTap: () {
+  //       print('Menu Card');
+  //     },
+  //   child: Container(
+  //     height: MediaQuery.of(context).size.height * 0.15,
+  //     width: MediaQuery.of(context).size.width * 0.9,
+  //     // margin: EdgeInsets.only(bottom: 13),
+  //     // padding: EdgeInsets.only(left: 24, top: 12, bottom: 12, right: 12),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(15),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.grey,
+  //           blurRadius: 10,
+  //           spreadRadius: 0.1,
+  //           offset: Offset(5.0 , 5.0),
+  //         )
+  //       ],
+  //     ),
+  //     child: Row(
+  //       children: <Widget>[
+  //         Row(
+  //           crossAxisAlignment: CrossAxisAlignment.end,
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: <Widget>[
+  //             Container(
+  //               alignment: Alignment.center,
+  //               width: 100,
+  //               // height: 100,
+  //               decoration: BoxDecoration(
+  //                 color: Color(0xFFFF9A3E),
+  //                 shape: BoxShape.rectangle,
+  //                 image: DecorationImage(
+  //                   image: AssetImage('images/mouse.png'),
+  //                   fit: BoxFit.cover
+  //                 ),
+  //               ),
+  //             ),
+  //             SizedBox(
+  //               height: 100,
+  //             ),
+  //             Column(
+  //               children: <Widget>[
+  //                 Container(
+  //                   child: Text(  
+  //                     'Mouse Logitech LM145',
+  //                     textAlign: TextAlign.center,
+  //                     style: GoogleFonts.roboto(
+  //                       fontSize: 18,
+  //                       fontWeight: FontWeight.w500
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Row(
+  //                   children: <Widget>[
+  //                     Column(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: <Widget>[                       
+  //                       ],
+  //                     )
+  //                   ],
+  //                 )
+  //               ],
+  //             )
+  //           ],
+  //         )
+  //       ],
+  //     ),
+  //   )
+  //   ); 
+  // }
+
+  // Widget menuCard(){
+  //   return GestureDetector(
+  //     child: Card(
+  //       margin: EdgeInsets.all(16),
+  //       child: Container(
+  //         height: MediaQuery.of(context).size.height * 0.15,
+  //         width: MediaQuery.of(context).size.width * 0.9,
+  //         padding: EdgeInsets.all(16),
+  //         child: Row(
+  //           children: <Widget>[
+  //             Image.asset('images/mouse.png'),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // Widget menuCard(){
+  //   return GestureDetector(
+  //     child: Card(
+  //       child: Container(
+  //         height: MediaQuery.of(context).size.height * 0.15,
+  //         width: MediaQuery.of(context).size.width * 0.9,
+  //         child: ListTile(
+  //           title: Text('Mouse Logitech'),
+  //           subtitle: Row(
+  //             children: <Widget>[
+  //               SizedBox(
+  //                 height: 100,
+  //               ),
+  //               Column(
+  //                 mainAxisAlignment: MainAxisAlignment.start,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: <Widget>[
+  //                   Text('Quantity'),
+  //                   SizedBox(
+  //                     height: 10,
+  //                   ),
+  //                   Text('10 Unit')
+  //                 ],
+  //               ),
+  //               SizedBox(
+  //                 width: 30,
+  //               ),
+  //               Column(
+  //                 // mainAxisAlignment: MainAxisAlignment.start,
+  //                 // crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: <Widget>[
+  //                   Text('Kondisi'),
+  //                   SizedBox(
+  //                     height: 10,
+  //                   ),
+  //                   Text('Good')
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //           leading: Image.asset(
+  //             'images/dak.jpg', 
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
