@@ -433,30 +433,36 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Container(
-            height: 1.1 * (MediaQuery.of(context).size.height / 20),
-            width: 3.5 * (MediaQuery.of(context).size.width / 10),
-            //margin: EdgeInsets.only(bottom: 20),
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Color(0xFFEA340C),
-                side: BorderSide(width: 3.0, color: Colors.white),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 45,
+              minWidth: 140,
+            ),
+            child: Container(
+              height: 1.1 * (MediaQuery.of(context).size.height / 20),
+              width: 3.5 * (MediaQuery.of(context).size.width / 10),
+              //margin: EdgeInsets.only(bottom: 20),
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Color(0xFFEA340C),
+                  side: BorderSide(width: 3.0, color: Colors.white),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                print("Tombol Sign Up ditekan");
-                checkInputan();
-              },
-              child: Text(
-                "Sign Up",
-                style: GoogleFonts.poppins(
-                    //color: Colors.white,
-                    letterSpacing: 1.5,
-                    fontSize: MediaQuery.of(context).size.height / 45,
-                    fontWeight: FontWeight.w500),
+                onPressed: () {
+                  print("Tombol Sign Up ditekan");
+                  checkInputan();
+                },
+                child: Text(
+                  "Sign Up",
+                  style: GoogleFonts.poppins(
+                      //color: Colors.white,
+                      letterSpacing: 1.5,
+                      fontSize: MediaQuery.of(context).size.height / 45,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
             ),
           ),
@@ -547,35 +553,38 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.all(
             Radius.circular(15),
           ),
-          child: Container(
-            margin: EdgeInsets.only(top: 40),
-            height: isDosen
-                ? MediaQuery.of(context).size.height * 0.54
-                : MediaQuery.of(context).size.height * 0.63,
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              color: Colors.white10.withOpacity(0.3),
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: isDosen ? 500 : 550),
+            child: Container(
+              margin: EdgeInsets.only(top: 40),
+              height: isDosen
+                  ? MediaQuery.of(context).size.height * 0.54
+                  : MediaQuery.of(context).size.height * 0.63,
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Colors.white10.withOpacity(0.3),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                ),
               ),
-            ),
-            child: Form(
-              key: _key,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  buildName(),
-                  buildEmail(),
-                  if (isDosen) buildNIP(),
-                  if (!isDosen) buildNIM(),
-                  if (!isDosen) buildJurusan(),
-                  buildFakultas(),
-                  buildPassword(),
-                  buildSignUpButton(),
-                ],
+              child: Form(
+                key: _key,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    buildName(),
+                    buildEmail(),
+                    if (isDosen) buildNIP(),
+                    if (!isDosen) buildNIM(),
+                    if (!isDosen) buildJurusan(),
+                    buildFakultas(),
+                    buildPassword(),
+                    buildSignUpButton(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -609,46 +618,49 @@ class _RegisterPageState extends State<RegisterPage> {
         child: GestureDetector(
           child: Stack(
             children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFFF9F69),
-                      Color(0x79FFB183),
-                    ],
+              ConstrainedBox(
+                constraints: BoxConstraints(minWidth: 450, minHeight: 950),
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xFFFF9F69),
+                        Color(0x79FFB183),
+                      ],
+                    ),
                   ),
-                ),
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 80),
-                  child: Column(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Registrasi',
-                            style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700,
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 80),
+                    child: Column(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Registrasi',
+                              style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Column(
-                            children: <Widget>[
-                              buildContainer(),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                buildContainer(),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +12,51 @@ class HalamanUtama extends StatefulWidget {
 }
 
 class _HalamanUtamaState extends State<HalamanUtama> {
+  List<Barang> dataBarang = [
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Keyboard Razer xxxxxxxx',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+    Barang(
+      name: 'Mouse Logitech LM145',
+      condition: 'Elektronik',
+      amount: '10',
+      image: 'images/mouse.png',
+    ),
+  ];
+
   final fieldTextSearch = TextEditingController();
 
   bool isClicked = true;
@@ -64,7 +111,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
-  Widget dataBarang() {
+  Widget dataBarangHead() {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -101,7 +148,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
-  Widget barangDipinjam() {
+  Widget barangDipinjamHead() {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -138,7 +185,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
-  Widget approvedBarang() {
+  Widget approvedBarangHead() {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -174,16 +221,19 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       ),
     );
   }
-  
-  Widget menuCard() {
+
+  Widget menuCard_dataBarang(String nama, kategori, banyak, image) {
     return GestureDetector(
-    onTap: (){
-      print('Menu Card');
-    },
-    child: Container(
-      height: MediaQuery.of(context).size.height * 0.15,
-      width: MediaQuery.of(context).size.width * 0.9, 
-      decoration: BoxDecoration(
+      onTap: () {
+        print('Menu Card Detail Barang');
+        //print(MediaQuery.of(context).size.height * 0.15);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15), //top: 10, bottom: 10),
+        height: MediaQuery.of(context).size.height * 0.15,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           color: Colors.white,
           border: Border.all(
@@ -200,75 +250,106 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
               children: <Widget>[
-                Image.asset('images/mouse.png',
-                width: 80,
-                height: 80,),
-                SizedBox(
-                  width:5
+                Image.asset(
+                  // 'images/mouse.png',
+                  image,
+
+                  width: 80,
+                  height: 100,
+                  fit: BoxFit.contain,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
                     Container(
-                      child: Text('Mouse Logitech LM145',
-                      style: GoogleFonts.roboto(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),),
+                      width: 230,
+                      padding: EdgeInsets.only(bottom: 10),
+                      //color: Colors.amber,
+                      child: Text(
+                        // 'Mouse Logitech LM145',
+                        nama,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: GoogleFonts.roboto(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Row(
                       children: <Widget>[
+                        Container(
+                          child: Column(children: <Widget>[
+                            Text('Kuantitas',
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0x8C000000))),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                // '10 Unit',
+                                '$banyak Unit',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            )
+                          ]),
+                        ),
                         SizedBox(
-                          height: 80,
+                          width: 22,
+                        ),
+                        Container(
+                          width: 2,
+                          height: 45,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 22,
                         ),
                         Container(
                           child: Column(
-                            children:<Widget>[
-                             Text('Quantity',
-                             style: GoogleFonts.roboto(
-                               fontWeight: FontWeight.w400,
-                               fontSize: 14,
-                               color: Color(0x8C000000)
-                             )),
-                             SizedBox(
-                               height: 10,
-                             ),
-                             Text('10 Unit',
-                             style: GoogleFonts.poppins(
-                               fontWeight: FontWeight.normal,
-                               fontSize: 14
-                             ),)
-                            ] 
-                          ),
-                        ),
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Container(
-                          child: Column(
-                            children:<Widget>[
-                             Text('Kondisi',
-                             style: GoogleFonts.roboto(
-                               fontWeight: FontWeight.w400,
-                               fontSize: 14,
-                               color: Color(0x8C000000)
-                             )),
-                             SizedBox(
-                               height: 10,
-                             ),
-                             Text('Good',
-                             style: GoogleFonts.poppins(
-                               fontWeight: FontWeight.normal,
-                               fontSize: 14
-                             ),)
-                            ] 
+                            children: <Widget>[
+                              Text('Kategori',
+                                  style: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0x8C000000))),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                  // color: kategori == 'Good'
+                                  //     ? Colors.amber
+                                  //     : Colors.redAccent,
+                                  // border: Border.all(
+                                  //   color: Colors.amber,
+                                  //   width: 2,
+                                  // ),
+                                ),
+                                child: Text(
+                                  kategori,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ],
@@ -278,19 +359,20 @@ class _HalamanUtamaState extends State<HalamanUtama> {
               ],
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(15, 0, 0, 75),
+              alignment: Alignment.topCenter,
+              //margin: EdgeInsets.fromLTRB(15, 0, 0, 75),
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   print('Triple Dots');
                 },
                 child: Icon(Icons.more_vert),
               ),
             )
-          ],  
+          ],
         ),
-    ),
-  );
-}
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +382,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           child: Stack(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height / 3.5,
+                height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -347,58 +429,47 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          dataBarang(),
+                          dataBarangHead(),
                           SizedBox(
                             width: 20,
                           ),
-                          barangDipinjam(),
+                          barangDipinjamHead(),
                           SizedBox(
                             width: 20,
                           ),
-                          approvedBarang(),
+                          approvedBarangHead(),
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 4,
+              Visibility(
+                visible: menu1,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 4,
+                  ),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(),
+                    itemCount: dataBarang.length,
+                    itemBuilder: (context, int index) {
+                      return menuCard_dataBarang(
+                        dataBarang[index].name,
+                        dataBarang[index].condition,
+                        dataBarang[index].amount,
+                        dataBarang[index].image,
+                      );
+                    },
+                  ),
                 ),
-                child: SingleChildScrollView(
-                   physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   crossAxisAlignment: CrossAxisAlignment.center,
-                   children: <Widget>[
-                     menuCard(),
-                     SizedBox(
-                       height: 10,
-                     ),
-                     menuCard(),
-                     SizedBox(
-                       height: 10,
-                     ),
-                     menuCard(),
-                     SizedBox(
-                       height: 10,
-                     ),
-                     menuCard(),
-                     SizedBox(
-                       height: 10,
-                     ),
-                     menuCard(),
-                   ],
-                )
-                )
               )
               // TOMBOL BACK
             ],
           ),
-          
         ),
         floatingActionButton: Visibility(
           // Tamplikan Ketika berada pada Menu Data Barang
@@ -423,6 +494,16 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           ),
         ));
   }
+}
+
+class Barang {
+  late String name, condition, amount, image;
+
+  Barang(
+      {required this.name,
+      required this.condition,
+      required this.amount,
+      required this.image});
 }
 
 Widget userAccount() {
