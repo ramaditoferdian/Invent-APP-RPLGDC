@@ -83,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
+      // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: () => print('Forgot Password pressed!'),
         padding: EdgeInsets.only(right: 30),
