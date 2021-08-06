@@ -12,6 +12,28 @@ class HalamanUtama extends StatefulWidget {
 }
 
 class _HalamanUtamaState extends State<HalamanUtama> {
+  late ScrollController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController();
+  }
+
+  void scrollUp() {
+    final double start = controller.position.minScrollExtent;
+
+    controller.animateTo(start,
+        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+  }
+
+  void scrollDown() {
+    final double end = controller.position.maxScrollExtent;
+
+    controller.animateTo(end,
+        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+  }
+
   List<Barang> dataBarang = [
     Barang(
       name: 'Mouse Logitech LM145',
@@ -20,7 +42,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       image: 'images/mouse.png',
     ),
     Barang(
-      name: 'Keyboard Razer xxxxxxxx',
+      name: 'Keyboard Razer xxxxxxxx sad a as ',
       condition: 'Elektronik',
       amount: '10',
       image: 'images/mouse.png',
@@ -63,6 +85,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
   bool menu1 = true;
   bool menu2 = false;
   bool menu3 = false;
+  bool menu4 = false;
 
   Widget buildSearch() {
     return Container(
@@ -119,8 +142,10 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           menu1 = isClicked;
           menu2 = !isClicked;
           menu3 = !isClicked;
+          menu4 = !isClicked;
           // isDosen = true;
           // clearInputan();
+          scrollUp();
         });
       },
       child: Column(
@@ -148,14 +173,15 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
-  Widget barangDipinjamHead() {
+  Widget prosesBarangHead() {
     return GestureDetector(
       onTap: () {
         setState(() {
-          print("Menu Barang Dipinjam");
+          print("Menu Proses Barang");
           menu1 = !isClicked;
           menu2 = isClicked;
           menu3 = !isClicked;
+          menu4 = !isClicked;
           // isDosen = true;
           // clearInputan();
         });
@@ -163,7 +189,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       child: Column(
         children: [
           Text(
-            "Barang Dipinjam",
+            "Proses Barang",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.height / 60,
               fontWeight: menu2 ? FontWeight.w500 : FontWeight.w400,
@@ -185,14 +211,15 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
-  Widget approvedBarangHead() {
+  Widget barangDipinjamHead() {
     return GestureDetector(
       onTap: () {
         setState(() {
-          print("Menu Approved Barang");
+          print("Menu Barang Dipinjam");
           menu1 = !isClicked;
           menu2 = !isClicked;
           menu3 = isClicked;
+          menu4 = !isClicked;
           // isDosen = true;
           // clearInputan();
         });
@@ -200,7 +227,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       child: Column(
         children: [
           Text(
-            "Approved Barang",
+            "Barang Dipinjam",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.height / 60,
               fontWeight: menu3 ? FontWeight.w500 : FontWeight.w400,
@@ -214,6 +241,45 @@ class _HalamanUtamaState extends State<HalamanUtama> {
             width: menu3 ? 50 : 0,
             decoration: new BoxDecoration(
               color: menu3 ? Colors.black : Colors.red.withAlpha(1),
+              shape: BoxShape.circle,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget rekapBarangHead() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          print("Menu Rekap Barang");
+          menu1 = !isClicked;
+          menu2 = !isClicked;
+          menu3 = !isClicked;
+          menu4 = isClicked;
+          // isDosen = true;
+          // clearInputan();
+          scrollDown();
+        });
+      },
+      child: Column(
+        children: [
+          Text(
+            "Rekap Barang",
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.height / 60,
+              fontWeight: menu4 ? FontWeight.w500 : FontWeight.w400,
+              color: menu4 ? Colors.black : Colors.black38,
+            ),
+          ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            margin: EdgeInsets.only(top: 3),
+            height: 4,
+            width: menu4 ? 50 : 0,
+            decoration: new BoxDecoration(
+              color: menu4 ? Colors.black : Colors.red.withAlpha(1),
               shape: BoxShape.circle,
             ),
           )
@@ -384,6 +450,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
               Container(
                 height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -394,42 +461,46 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                     ],
                   ),
                 ),
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Inventory Lab',
-                            style: GoogleFonts.sortsMillGoudy(
-                              color: Colors.black,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                            ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Inventory Lab',
+                          style: GoogleFonts.sortsMillGoudy(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
                           ),
-                          userAccount()
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          buildSearch(),
-                          iconSort(),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
+                        ),
+                        userAccount()
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        buildSearch(),
+                        iconSort(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SingleChildScrollView(
+                      controller: controller,
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           dataBarangHead(),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          prosesBarangHead(),
                           SizedBox(
                             width: 20,
                           ),
@@ -437,11 +508,11 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                           SizedBox(
                             width: 20,
                           ),
-                          approvedBarangHead(),
+                          rekapBarangHead(),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Visibility(
@@ -560,214 +631,3 @@ Widget iconSort() {
     ),
   );
 }
-
-
-// Nyoba-nyoba Card yang bagus
-
-// Widget menuCard(){
-//     return Card(
-//             clipBehavior: Clip.antiAlias,
-//             child: Container(
-//               height: 120,
-//               padding: const EdgeInsets.all(0),
-//               child: Row(children: [
-//                 Expanded(
-//                   flex: 5,
-//                   child: new Container(
-//                     decoration: new BoxDecoration(
-//                         image: new DecorationImage(
-//                             image: ExactAssetImage(
-//                                 'images/mouse.png'),
-//                             fit: BoxFit.fill)),
-//                   ),
-//                 ),
-//                 Spacer(
-//                   flex: 1,
-//                 ),
-//                 Expanded(
-//                   flex: 14,
-//                   child: Container(
-//                     // padding: const EdgeInsets.only(top),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       mainAxisAlignment: MainAxisAlignment.end,
-//                       children: <Widget>[
-//                         Text("Mouse Logitech",
-//                             style: TextStyle(
-//                                 fontSize: 20.0, fontWeight: FontWeight.bold)),
-//                         Row(
-//                           children: <Widget>[
-//                             Text(
-//                               'Barcode : ',
-//                               style: TextStyle(fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               "barcode",
-//                               style: TextStyle(fontSize: 15.0),
-//                             ),
-//                           ],
-//                         ),
-//                         Row(
-//                           children: <Widget>[
-//                             Text(
-//                               'Harga : ',
-//                               style: TextStyle(
-//                                   fontWeight: FontWeight.bold, fontSize: 20),
-//                             ),
-//                             Text(
-//                               'harga',
-//                               style: TextStyle(fontSize: 20),
-//                             )
-//                           ],
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ]),
-//             ),
-//           );
-//   }
-
- // Widget menuCard(){
-  //   return GestureDetector(
-  //     onTap: () {
-  //       print('Menu Card');
-  //     },
-  //   child: Container(
-  //     height: MediaQuery.of(context).size.height * 0.15,
-  //     width: MediaQuery.of(context).size.width * 0.9,
-  //     // margin: EdgeInsets.only(bottom: 13),
-  //     // padding: EdgeInsets.only(left: 24, top: 12, bottom: 12, right: 12),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(15),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey,
-  //           blurRadius: 10,
-  //           spreadRadius: 0.1,
-  //           offset: Offset(5.0 , 5.0),
-  //         )
-  //       ],
-  //     ),
-  //     child: Row(
-  //       children: <Widget>[
-  //         Row(
-  //           crossAxisAlignment: CrossAxisAlignment.end,
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: <Widget>[
-  //             Container(
-  //               alignment: Alignment.center,
-  //               width: 100,
-  //               // height: 100,
-  //               decoration: BoxDecoration(
-  //                 color: Color(0xFFFF9A3E),
-  //                 shape: BoxShape.rectangle,
-  //                 image: DecorationImage(
-  //                   image: AssetImage('images/mouse.png'),
-  //                   fit: BoxFit.cover
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(
-  //               height: 100,
-  //             ),
-  //             Column(
-  //               children: <Widget>[
-  //                 Container(
-  //                   child: Text(  
-  //                     'Mouse Logitech LM145',
-  //                     textAlign: TextAlign.center,
-  //                     style: GoogleFonts.roboto(
-  //                       fontSize: 18,
-  //                       fontWeight: FontWeight.w500
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Row(
-  //                   children: <Widget>[
-  //                     Column(
-  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       children: <Widget>[                       
-  //                       ],
-  //                     )
-  //                   ],
-  //                 )
-  //               ],
-  //             )
-  //           ],
-  //         )
-  //       ],
-  //     ),
-  //   )
-  //   ); 
-  // }
-
-  // Widget menuCard(){
-  //   return GestureDetector(
-  //     child: Card(
-  //       margin: EdgeInsets.all(16),
-  //       child: Container(
-  //         height: MediaQuery.of(context).size.height * 0.15,
-  //         width: MediaQuery.of(context).size.width * 0.9,
-  //         padding: EdgeInsets.all(16),
-  //         child: Row(
-  //           children: <Widget>[
-  //             Image.asset('images/mouse.png'),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget menuCard(){
-  //   return GestureDetector(
-  //     child: Card(
-  //       child: Container(
-  //         height: MediaQuery.of(context).size.height * 0.15,
-  //         width: MediaQuery.of(context).size.width * 0.9,
-  //         child: ListTile(
-  //           title: Text('Mouse Logitech'),
-  //           subtitle: Row(
-  //             children: <Widget>[
-  //               SizedBox(
-  //                 height: 100,
-  //               ),
-  //               Column(
-  //                 mainAxisAlignment: MainAxisAlignment.start,
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: <Widget>[
-  //                   Text('Quantity'),
-  //                   SizedBox(
-  //                     height: 10,
-  //                   ),
-  //                   Text('10 Unit')
-  //                 ],
-  //               ),
-  //               SizedBox(
-  //                 width: 30,
-  //               ),
-  //               Column(
-  //                 // mainAxisAlignment: MainAxisAlignment.start,
-  //                 // crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: <Widget>[
-  //                   Text('Kondisi'),
-  //                   SizedBox(
-  //                     height: 10,
-  //                   ),
-  //                   Text('Good')
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //           leading: Image.asset(
-  //             'images/dak.jpg', 
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
