@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
 
 class DetailBarang extends StatefulWidget {
-  const DetailBarang({ Key? key }) : super(key: key);
+  const DetailBarang({Key? key}) : super(key: key);
 
   @override
   _DetailBarangState createState() => _DetailBarangState();
@@ -29,22 +29,33 @@ class _DetailBarangState extends State<DetailBarang> {
     ),
   ];
 
-  Widget buildKategori(){
+  final imageLoc = [
+    'images/mouse2.png',
+    'images/mouse.png',
+  ];
+
+  Widget buildImageSliding(String imageAst, int index){
+    return Container(
+      // margin: EdgeInsets.symmetric(horizontal: 12),
+      child: Image.asset(
+        imageAst,
+        // fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget buildKategori() {
     return Container(
       width: 350,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:[
+        children: [
           Container(
-            child: Text(
-              'Kategori',
+              child: Text(
+            'Kategori',
             style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey
-              ),
-            )
-          ),
+                fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
+          )),
           ConstrainedBox(
             constraints: BoxConstraints(),
             child: Container(
@@ -72,39 +83,31 @@ class _DetailBarangState extends State<DetailBarang> {
       ),
     );
   }
-  
-  Widget buildKuantitas(){
+
+  Widget buildKuantitas() {
     return Container(
       width: 350,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:[
+        children: [
           Container(
-            child: Text(
-              'Kuantitas',
+              child: Text(
+            'Kuantitas',
             style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey
-              ),
-            )
-          ),
+                fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
+          )),
           Container(
-            child: Text(
-              '10 Unit',
+              child: Text(
+            '10 Unit',
             style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Colors.black
-              ),
-            )
-          ),
+                fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
+          )),
         ],
       ),
     );
   }
 
-  Widget buildDeskripsi(){
+  Widget buildDeskripsi() {
     return Column(
       children: [
         Column(
@@ -120,17 +123,16 @@ class _DetailBarangState extends State<DetailBarang> {
                 'Deskripsi',
                 // textAlign: TextAlign.left,
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey
-                  ),
-                ),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey),
               ),
-              SizedBox(
-                height: 15,
-              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
           ],
-        ),  
+        ),
         Divider(
           color: Colors.grey,
           thickness: 0.5,
@@ -151,7 +153,7 @@ class _DetailBarangState extends State<DetailBarang> {
     );
   }
 
-  Widget buildListBarang(String kode,kondisi, tanggal){
+  Widget buildListBarang(String kode, kondisi, tanggal) {
     return Column(
       children: [
         Container(
@@ -163,33 +165,24 @@ class _DetailBarangState extends State<DetailBarang> {
             children: [
               Container(
                 child: Text(
-                  // 'LM145-1',
-                  '$kode',
-                  style: GoogleFonts.roboto(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500
-                  )
-                ),
-              ),
-              Container(
-                child: Text(
-                  // 'Good',
-                  '$kondisi',
-                  style: GoogleFonts.roboto(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400
-                  )
-                ),
-              ),
-              Container(
-                child: Text(
-                  // '12/02/21',
-                  '$tanggal',
+                    // 'LM145-1',
+                    '$kode',
                     style: GoogleFonts.roboto(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400
-                  )
-                ),
+                        fontSize: 15, fontWeight: FontWeight.w500)),
+              ),
+              Container(
+                child: Text(
+                    // 'Good',
+                    '$kondisi',
+                    style: GoogleFonts.roboto(
+                        fontSize: 15, fontWeight: FontWeight.w400)),
+              ),
+              Container(
+                child: Text(
+                    // '12/02/21',
+                    '$tanggal',
+                    style: GoogleFonts.roboto(
+                        fontSize: 15, fontWeight: FontWeight.w400)),
               ),
             ],
           ),
@@ -203,9 +196,9 @@ class _DetailBarangState extends State<DetailBarang> {
   }
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: GestureDetector(
           child: Stack(
@@ -220,12 +213,17 @@ class _DetailBarangState extends State<DetailBarang> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      child: Image.asset(
-                        'images/mouse.png',
-                        width: 200,
-                        height: 200,
-                        fit: BoxFit.contain,
+                    Center(
+                      child: CarouselSlider.builder(
+                        options: CarouselOptions(
+                          // height: 250
+                        ),
+                        itemCount: imageLoc.length,
+                        itemBuilder: (context, index, realIndex){
+                          final imageLocs = imageLoc[index];
+
+                          return buildImageSliding(imageLocs, index);
+                        },
                       ),
                     ),
                     // Container(
@@ -249,14 +247,12 @@ class _DetailBarangState extends State<DetailBarang> {
                             'Mouse Logitech LM145',
                             // textAlign: TextAlign.left,
                             style: GoogleFonts.roboto(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500
-                              ),
-                            ),
+                                fontSize: 25, fontWeight: FontWeight.w500),
                           ),
-                         SizedBox(
-                           height: 20,
-                         ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                     Divider(
@@ -285,9 +281,9 @@ class _DetailBarangState extends State<DetailBarang> {
                         shrinkWrap: true,
                         separatorBuilder: (BuildContext context, int index) =>
                             Divider(
-                             color: Colors.grey,
-                             thickness: 0.5,
-                            ),
+                          color: Colors.grey,
+                          thickness: 0.5,
+                        ),
                         itemCount: listBarang.length,
                         itemBuilder: (context, int index) {
                           return buildListBarang(
@@ -296,24 +292,19 @@ class _DetailBarangState extends State<DetailBarang> {
                             listBarang[index].date,
                           );
                         },
-                     ),
+                      ),
                     ),
-                    ],
+                  ],
                 ),
-              )
-            ),
+              )),
         ],
-      )
-      ),
-    )
-    );
+      )),
+    ));
   }
 }
+
 class Barang {
   late String code, condition, date;
 
-  Barang(
-      {required this.code,
-      required this.condition,
-      required this.date});
+  Barang({required this.code, required this.condition, required this.date});
 }
