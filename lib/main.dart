@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/page/detail/dataPinjam.dart';
 import 'package:inventory_app/page/halamanUtama.dart';
 import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: HalamanUtama(),
+      home: LoginPage(),
     );
   }
 }

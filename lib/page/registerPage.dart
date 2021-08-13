@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/loginPage.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -55,6 +56,11 @@ class _RegisterPageState extends State<RegisterPage> {
       print('Jurusan : $jurusan');
       print('Fakultas : $fakultas');
       print('Password : $password');
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
     } else {
       // form.reset();
       print(fieldTextPassword.text.length);
