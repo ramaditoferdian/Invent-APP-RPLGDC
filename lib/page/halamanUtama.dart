@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'detail/dataPinjam.dart';
+
 class HalamanUtama extends StatefulWidget {
   const HalamanUtama({Key? key}) : super(key: key);
 
@@ -78,6 +80,8 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       image: 'images/mouse.png',
     ),
   ];
+
+  List<Barang> barangDipinjam = [];
 
   final fieldTextSearch = TextEditingController();
 
@@ -440,6 +444,162 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
+  Widget menuCard_barangDipinjam(String nama, kategori, banyak, image) {
+    return GestureDetector(
+      onTap: () {
+        print('Menu Card Detail Barang');
+        //print(MediaQuery.of(context).size.height * 0.15);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailBarangDipinjam()),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15), //top: 10, bottom: 10),
+        height: MediaQuery.of(context).size.height * 0.15,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  // 'images/mouse.png',
+                  image,
+
+                  width: 80,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 230,
+                      padding: EdgeInsets.only(bottom: 10),
+                      //color: Colors.amber,
+                      child: Text(
+                        // 'Mouse Logitech LM145',
+                        nama,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: GoogleFonts.roboto(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          child: Column(children: <Widget>[
+                            Text('Kuantitas',
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0x8C000000))),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                // '10 Unit',
+                                '$banyak Unit',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            )
+                          ]),
+                        ),
+                        SizedBox(
+                          width: 22,
+                        ),
+                        Container(
+                          width: 2,
+                          height: 45,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 22,
+                        ),
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Text('Kategori',
+                                  style: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0x8C000000))),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                  // color: kategori == 'Good'
+                                  //     ? Colors.amber
+                                  //     : Colors.redAccent,
+                                  // border: Border.all(
+                                  //   color: Colors.amber,
+                                  //   width: 2,
+                                  // ),
+                                ),
+                                child: Text(
+                                  kategori,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              //margin: EdgeInsets.fromLTRB(15, 0, 0, 75),
+              child: GestureDetector(
+                onTap: () {
+                  print('Triple Dots');
+                },
+                child: Icon(Icons.more_vert),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -537,7 +697,30 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                     },
                   ),
                 ),
-              )
+              ),
+              Visibility(
+                visible: menu3,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 4,
+                  ),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(),
+                    itemCount: dataBarang.length,
+                    itemBuilder: (context, int index) {
+                      return menuCard_barangDipinjam(
+                        dataBarang[index].name,
+                        dataBarang[index].condition,
+                        dataBarang[index].amount,
+                        dataBarang[index].image,
+                      );
+                    },
+                  ),
+                ),
+              ),
               // TOMBOL BACK
             ],
           ),
@@ -570,11 +753,12 @@ class _HalamanUtamaState extends State<HalamanUtama> {
 class Barang {
   late String name, condition, amount, image;
 
-  Barang(
-      {required this.name,
-      required this.condition,
-      required this.amount,
-      required this.image});
+  Barang({
+    required this.name,
+    required this.condition,
+    required this.amount,
+    required this.image,
+  });
 }
 
 Widget userAccount() {
