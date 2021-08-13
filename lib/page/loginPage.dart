@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/halamanUtama.dart';
 import 'package:inventory_app/page/registerPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
+      // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: () => print('Forgot Password pressed!'),
         padding: EdgeInsets.only(right: 30),
@@ -116,7 +118,14 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
-              onPressed: () => print('Login Pressed'),
+              onPressed: () {
+                print('Login Pressed');
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HalamanUtama()),
+                );
+              },
               child: Text(
                 'Login',
                 style: GoogleFonts.poppins(

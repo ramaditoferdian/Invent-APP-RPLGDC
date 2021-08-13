@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: HalamanUtama(),
+      home: LoginPage(),
     );
   }
 }
