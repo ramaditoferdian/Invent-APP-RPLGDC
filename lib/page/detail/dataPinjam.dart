@@ -40,220 +40,219 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
   }
 
   Widget dataPeminjam() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-        ),
-        Container(
-          alignment: Alignment.center,
-          child: Text(
-            'Sedang dipinjam',
-            overflow: TextOverflow.ellipsis,
-            softWrap: false,
-            style: GoogleFonts.poppins(
-              color: Colors.black.withOpacity(0.68),
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
+    return Container(
+      height: 265,
+      color: Colors.black.withOpacity(0.2),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              'Sedang dipinjam',
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              style: GoogleFonts.poppins(
+                color: Colors.black.withOpacity(0.68),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 15),
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Data Peminjam',
-            overflow: TextOverflow.ellipsis,
-            softWrap: false,
-            style: GoogleFonts.poppins(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+          Container(
+            padding: EdgeInsets.only(left: 15, top: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Data Peminjam',
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Nama : ',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 35),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Nama : ',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              color: Colors.amber,
-              padding: EdgeInsets.only(left: 15),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Raihan',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                padding: EdgeInsets.only(left: 15),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Raihan',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'NIM : ',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            ],
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 35),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'NIM : ',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              color: Colors.amber,
-              padding: EdgeInsets.only(left: 15),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '1302567490',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                padding: EdgeInsets.only(left: 15),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '1302567490',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Jurusan : ',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            ],
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 35),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Jurusan : ',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              color: Colors.amber,
-              padding: EdgeInsets.only(left: 15),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'S1 Informatika',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                padding: EdgeInsets.only(left: 15),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'S1 Informatika',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Fakultas : ',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            ],
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 35),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Fakultas : ',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              color: Colors.amber,
-              padding: EdgeInsets.only(left: 15),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Informatika',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                padding: EdgeInsets.only(left: 15),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Informatika',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Periode Pinjam : ',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            ],
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 35),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Periode Pinjam : ',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              color: Colors.amber,
-              padding: EdgeInsets.only(left: 15),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '15/03/21 - 21/03/21',
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                padding: EdgeInsets.only(left: 15),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '15/03/21 - 21/03/21',
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-      ],
+            ],
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+        ],
+      ),
     );
   }
 
@@ -282,7 +281,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
           ),
         ),
         Divider(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           height: 1,
           thickness: 1,
         ),
@@ -307,7 +306,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
           ),
         ),
         Divider(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           height: 1,
           thickness: 1,
         ),
@@ -327,20 +326,20 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   'Kode Unit :',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 Text(
                   'LM14-3',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
@@ -348,8 +347,8 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
             Container(
               height: 80,
               child: VerticalDivider(
+                color: Colors.black.withOpacity(0.2),
                 thickness: 1,
-                color: Colors.black,
               ),
             ),
             Column(
@@ -358,20 +357,33 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   'Kondisi :',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
-                Text(
-                  'Good',
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                  style: GoogleFonts.roboto(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(3),
+                    ),
+                    color: Colors.amber,
+                    border: Border.all(
+                      color: Colors.amber,
+                      width: 2,
+                    ),
+                  ),
+                  child: Text(
+                    'Good',
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
@@ -379,7 +391,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
           ],
         ),
         Divider(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           height: 1,
           thickness: 1,
         ),
@@ -413,7 +425,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
           ),
         ),
         Divider(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           height: 1,
           thickness: 1,
         ),
@@ -440,7 +452,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
           ],
         ),
         Divider(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.2),
           height: 1,
           thickness: 1,
         ),
