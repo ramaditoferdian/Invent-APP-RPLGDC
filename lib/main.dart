@@ -5,7 +5,14 @@ import 'package:inventory_app/page/halamanUtama.dart';
 import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
 
-void main() {
+import 'package:flutter/services.dart';
+
+Future<void> main() async {
+  // Untuk Lock Orientation
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
   runApp(MyApp());
 }
 
@@ -16,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: LoginPage(),
+      home: HalamanUtama(),
     );
   }
 }
