@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DetailBarangDipinjam extends StatefulWidget {
+class DetailProsesBarang extends StatefulWidget {
   @override
-  DetailBarangDipinjamState createState() => DetailBarangDipinjamState();
+  DetailProsesBarangState createState() => DetailProsesBarangState();
 }
 
-class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
+class DetailProsesBarangState extends State<DetailProsesBarang> {
   Widget backButton() {
     return Container(
       //padding: EdgeInsets.all(50),
@@ -439,7 +439,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
         Stack(
           children: <Widget>[
             Container(
-              height: 250,
+              height: 200,
               color: Colors.white,
               child: Center(
                 child: Image.asset(
@@ -460,6 +460,29 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
     );
   }
 
+  Widget textButton(Color warna, String teks) {
+    return InkWell(
+      onTap: () {
+        print('Tombol $teks ditekan');
+      },
+      child: Ink(
+        height: 60,
+        width: MediaQuery.of(context).size.width * 0.5,
+        color: warna,
+        child: Center(
+          child: Text(
+            teks,
+            style: GoogleFonts.roboto(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -472,6 +495,12 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
               identity(),
               deskripsi(),
               dataPeminjam(),
+              Row(
+                children: [
+                  textButton(Colors.red, 'Tolak'),
+                  textButton(Colors.green, 'Terima'),
+                ],
+              )
             ],
           ),
         ),

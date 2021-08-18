@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/detail/detailBarang.dart';
+import 'package:inventory_app/page/detail/proses.dart';
 
 import 'detail/dataPinjam.dart';
 
@@ -36,11 +38,13 @@ class _HalamanUtamaState extends State<HalamanUtama> {
         duration: Duration(milliseconds: 500), curve: Curves.easeIn);
   }
 
+  // DATA DUMMY
+
   List<Barang> dataBarang = [
     Barang(
       name: 'Mouse Logitech LM145',
-      condition: 'Elektronik',
-      amount: '10',
+      condition: 'Elektronikkkkkkkkkkk',
+      amount: '1000000000',
       image: 'images/mouse.png',
     ),
     Barang(
@@ -81,7 +85,85 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     ),
   ];
 
-  List<Barang> barangDipinjam = [];
+  List<Item> barangDipinjam = [
+    Item(
+      name: 'Mouse Logitech LM145 dasd asd asd as da',
+      unit_code: 'LM145-1',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Item(
+      name: 'Mouse Logitech LM145 dasd asd asd as da',
+      unit_code: 'LM145-1',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+  ];
+
+  List<Pending> prosesBarang = [
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+    Pending(
+      name: 'Mouse Logitech LM145',
+      request_date: '12 Mar 2021',
+      borrower: 'Raihan',
+      image: 'images/mouse.png',
+    ),
+  ];
+
+// ========================================================================== //
 
   final fieldTextSearch = TextEditingController();
 
@@ -90,6 +172,61 @@ class _HalamanUtamaState extends State<HalamanUtama> {
   bool menu2 = false;
   bool menu3 = false;
   bool menu4 = false;
+
+  Widget userAccount() {
+    double _size = 45;
+
+    return GestureDetector(
+      onTap: () {
+        print("akun");
+      },
+      child: Container(
+        height: _size,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.person,
+                color: Colors.black,
+                size: _size,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget iconSort() {
+    double _size = 30;
+
+    return GestureDetector(
+      onTap: () {
+        print("sort");
+      },
+      child: Container(
+        padding: EdgeInsets.all(5),
+        height: _size,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(135),
+          child: Icon(
+            Icons.sort,
+            size: _size - 10,
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget buildSearch() {
     return Container(
@@ -297,161 +434,9 @@ class _HalamanUtamaState extends State<HalamanUtama> {
       onTap: () {
         print('Menu Card Detail Barang');
         //print(MediaQuery.of(context).size.height * 0.15);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        margin: EdgeInsets.symmetric(horizontal: 15), //top: 10, bottom: 10),
-        height: MediaQuery.of(context).size.height * 0.15,
-        width: MediaQuery.of(context).size.width * 0.9,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.white,
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 3,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Image.asset(
-                  // 'images/mouse.png',
-                  image,
-
-                  width: 80,
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: 230,
-                      padding: EdgeInsets.only(bottom: 10),
-                      //color: Colors.amber,
-                      child: Text(
-                        // 'Mouse Logitech LM145',
-                        nama,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: false,
-                        style: GoogleFonts.roboto(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          child: Column(children: <Widget>[
-                            Text('Kuantitas',
-                                style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Color(0x8C000000))),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                // '10 Unit',
-                                '$banyak Unit',
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14),
-                              ),
-                            )
-                          ]),
-                        ),
-                        SizedBox(
-                          width: 22,
-                        ),
-                        Container(
-                          width: 2,
-                          height: 45,
-                          color: Colors.amber,
-                        ),
-                        SizedBox(
-                          width: 22,
-                        ),
-                        Container(
-                          child: Column(
-                            children: <Widget>[
-                              Text('Kategori',
-                                  style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Color(0x8C000000))),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                  // color: kategori == 'Good'
-                                  //     ? Colors.amber
-                                  //     : Colors.redAccent,
-                                  // border: Border.all(
-                                  //   color: Colors.amber,
-                                  //   width: 2,
-                                  // ),
-                                ),
-                                child: Text(
-                                  kategori,
-                                  style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              //margin: EdgeInsets.fromLTRB(15, 0, 0, 75),
-              child: GestureDetector(
-                onTap: () {
-                  print('Triple Dots');
-                },
-                child: Icon(Icons.more_vert),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget menuCard_barangDipinjam(String nama, kategori, banyak, image) {
-    return GestureDetector(
-      onTap: () {
-        print('Menu Card Detail Barang');
-        //print(MediaQuery.of(context).size.height * 0.15);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DetailBarangDipinjam()),
+          MaterialPageRoute(builder: (context) => DetailBarang()),
         );
       },
       child: Container(
@@ -518,10 +503,13 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                               height: 10,
                             ),
                             Container(
+                              // color: Colors.amber,
+                              width: 95,
                               alignment: Alignment.center,
                               child: Text(
                                 // '10 Unit',
                                 '$banyak Unit',
+                                overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14),
@@ -568,11 +556,17 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                                   //   width: 2,
                                   // ),
                                 ),
-                                child: Text(
-                                  kategori,
-                                  style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14),
+                                child: Container(
+                                  width: 95,
+                                  // color: Colors.amber,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    kategori,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14),
+                                  ),
                                 ),
                               )
                             ],
@@ -594,6 +588,293 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                 child: Icon(Icons.more_vert),
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget menuCard_barangDipinjam(String nama, kode_unit, peminjam, image) {
+    return GestureDetector(
+      onTap: () {
+        print('Menu Card Barang Dipinjam');
+        //print(MediaQuery.of(context).size.height * 0.15);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailBarangDipinjam()),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15), //top: 10, bottom: 10),
+        height: MediaQuery.of(context).size.height * 0.15,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  // 'images/mouse.png',
+                  image,
+
+                  width: 80,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      width: 230,
+                      padding: EdgeInsets.only(bottom: 10),
+                      //color: Colors.amber,
+                      child: Text(
+                        // 'Mouse Logitech LM145',
+                        nama,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: GoogleFonts.roboto(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          child: Column(children: <Widget>[
+                            Text('Kode Unit',
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0x8C000000))),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              width: 95,
+                              // color: Colors.amber,
+                              alignment: Alignment.center,
+                              child: Text(
+                                kode_unit,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            )
+                          ]),
+                        ),
+                        SizedBox(
+                          width: 22,
+                        ),
+                        Container(
+                          width: 2,
+                          height: 45,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 22,
+                        ),
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Text('Peminjam',
+                                  style: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0x8C000000))),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  // color: Colors.amber,
+                                  width: 95,
+                                  child: Text(
+                                    peminjam,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget menuCard_prosesBarang(
+      String nama, tanggal_pengajuan, peminjam, image) {
+    return GestureDetector(
+      onTap: () {
+        print('Menu Card Proses Barang');
+        //print(MediaQuery.of(context).size.height * 0.15);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailProsesBarang()),
+        );
+      },
+      child: Container(
+        height: 1000,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 5), //top: 10, bottom: 10),
+        // height: MediaQuery.of(context).size.height * 0.15,
+        // width: MediaQuery.of(context).size.width * 0.5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  // color: Colors.orange,
+                  height: 50,
+                  width: 50,
+                  child: Image.asset(
+                    // 'images/mouse.png',
+                    image,
+
+                    // width: 40,
+                    // height: 50,
+
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    tanggal_pengajuan,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.normal, fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.white,
+              height: 10,
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 150,
+                  padding: EdgeInsets.only(bottom: 10),
+                  //color: Colors.amber,
+                  child: Text(
+                    // 'Mouse Logitech LM145',
+                    nama,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                    style: GoogleFonts.roboto(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 2,
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.white,
+              height: 5,
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Text('Pengajuan Barang',
+                          style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: Color(0x8C000000))),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.white,
+              height: 2,
+            ),
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  child: Container(
+                    // color: Colors.amber,
+                    width: 150,
+
+                    child: Text(
+                      peminjam,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500, fontSize: 14),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -699,6 +980,45 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                 ),
               ),
               Visibility(
+                visible: menu2,
+                child: Container(
+                  // width: MediaQuery.of(context).size.width * 0.5,
+                  // alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 4,
+                      left: 15,
+                      right: 15),
+                  // child: ListView.separated(
+                  //   shrinkWrap: true,
+                  //   separatorBuilder: (BuildContext context, int index) =>
+                  //       Divider(),
+                  //   itemCount: prosesBarang.length,
+                  //   itemBuilder: (context, int index) {
+                  //     return menuCard_prosesBarang(
+                  //       prosesBarang[index].name,
+                  //       prosesBarang[index].request_date,
+                  //       prosesBarang[index].borrower,
+                  //       prosesBarang[index].image,
+                  //     );
+                  //   },
+                  // ),
+                  child: GridView.count(
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    childAspectRatio: (1 / 1),
+                    children: List.generate(prosesBarang.length, (index) {
+                      return menuCard_prosesBarang(
+                        prosesBarang[index].name,
+                        prosesBarang[index].request_date,
+                        prosesBarang[index].borrower,
+                        prosesBarang[index].image,
+                      );
+                    }),
+                  ),
+                ),
+              ),
+              Visibility(
                 visible: menu3,
                 child: Container(
                   alignment: Alignment.topCenter,
@@ -709,13 +1029,13 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                     shrinkWrap: true,
                     separatorBuilder: (BuildContext context, int index) =>
                         Divider(),
-                    itemCount: dataBarang.length,
+                    itemCount: barangDipinjam.length,
                     itemBuilder: (context, int index) {
                       return menuCard_barangDipinjam(
-                        dataBarang[index].name,
-                        dataBarang[index].condition,
-                        dataBarang[index].amount,
-                        dataBarang[index].image,
+                        barangDipinjam[index].name,
+                        barangDipinjam[index].unit_code,
+                        barangDipinjam[index].borrower,
+                        barangDipinjam[index].image,
                       );
                     },
                   ),
@@ -761,57 +1081,24 @@ class Barang {
   });
 }
 
-Widget userAccount() {
-  double _size = 45;
+class Item {
+  late String name, unit_code, borrower, image;
 
-  return GestureDetector(
-    onTap: () {
-      print("akun");
-    },
-    child: Container(
-      height: _size,
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.person,
-              color: Colors.black,
-              size: _size,
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
+  Item({
+    required this.name,
+    required this.unit_code,
+    required this.borrower,
+    required this.image,
+  });
 }
 
-Widget iconSort() {
-  double _size = 30;
+class Pending {
+  late String name, request_date, borrower, image;
 
-  return GestureDetector(
-    onTap: () {
-      print("sort");
-    },
-    child: Container(
-      padding: EdgeInsets.all(5),
-      height: _size,
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-      ),
-      child: Transform(
-        alignment: Alignment.center,
-        transform: Matrix4.rotationY(135),
-        child: Icon(
-          Icons.sort,
-          size: _size - 10,
-        ),
-      ),
-    ),
-  );
+  Pending({
+    required this.name,
+    required this.request_date,
+    required this.borrower,
+    required this.image,
+  });
 }
