@@ -6,6 +6,7 @@ import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
 
 import 'package:flutter/services.dart';
+import 'package:inventory_app/page/user/userPage.dart';
 
 Future<void> main() async {
   // Untuk Lock Orientation
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: HalamanUtama(),
+      home: UserPage(),
     );
   }
 }
