@@ -11,26 +11,19 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  // List<DataDiri> listIsiDataDiri = [
-  //   DataDiri(
-  //     icon: Icons.email,
-  //     penjelasan: 'Good',
-  //   ),
-  //   DataDiri(
-  //     icon: Icons.email,
-  //     penjelasan: 'Poor',
-  //   ),
-  //   DataDiri(
-  //     icon: Icons.email,
-  //     penjelasan: 'Good',
-  //   ),
-  // ];
+  List<DataDiri> listIsiDataDiri = [
+    DataDiri(
+      email:'adi@mail.com',
+      nim: '1301194084',
+      jurusan: 'Informatika',
+      fakultas: 'FIF',
+    ),
+  ];
+ // =========================================== //
 
-  // static const _iconTypes = <IconData>[
-  //   Icons.cake,
-  //   Icons.add_location_sharp,
-  //   Icons.email
-  // ];
+  bool isClicked = true;
+  bool menuDataDiri = true;
+  bool menuHistory = false;
 
   Widget userAccount() {
     double _size = 85;
@@ -82,16 +75,22 @@ class _UserPageState extends State<UserPage> {
   Widget personKecilIcon() {
     return OutlinedButton(
       onPressed: () {
-        print("Data Diri");
+        setState(() {
+          menuDataDiri = isClicked;
+          menuHistory = !isClicked;
+          print("Data Diri");
+        });
       },
       style: OutlinedButton.styleFrom(
           primary: Colors.white,
           // backgroundColor: Colors.white,
-          side: BorderSide(width: 2.0, color: Colors.black),
+          side: BorderSide(
+            width: 2.0, 
+            color: menuDataDiri ? Colors.black : Colors.grey),
           shape: CircleBorder()),
       child: Icon(
         Icons.person,
-        color: Colors.black,
+        color: menuDataDiri ? Colors.black : Colors.grey,
         size: 25,
       ),
     );
@@ -122,17 +121,19 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget historyItemIcon() {
-    return Container(
-      child: IconButton(
-        icon: Icon(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          menuDataDiri = !isClicked;
+          menuHistory = isClicked;
+          print("History");
+        });
+      },
+      child: Icon(
           Icons.history,
+          size: 40,
+          color: menuHistory ? Colors.black : Colors.grey,
         ),
-        iconSize: 40,
-        color: Colors.black,
-        onPressed: () {
-          print('History Item');
-        },
-      ),
     );
   }
   
@@ -148,9 +149,9 @@ class _UserPageState extends State<UserPage> {
       );
   }
 
-  Widget isiDataDiri() {
-  return Row(
-      children: <Widget> [
+  Widget emailUser(String text){
+    return Row(
+      children: [
         Container(
           child: Icon(
             Icons.email,
@@ -162,16 +163,109 @@ class _UserPageState extends State<UserPage> {
         ),
         Container(
           child: Text(
-            'Bebas',
+            '$text',
             style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.w400
               ),
             ),
+          ),
+      ]
+    );
+  }
+  
+  Widget nimUser(String text){
+    return Row(
+      children: [
+        Container(
+          child: Icon(
+            Icons.badge_outlined,
+            size: 30,
+          ),
+        ),
+        SizedBox(
+          width: 30,
+        ),
+        Container(
+          child: Text(
+            '$text',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w400
+              ),
+            ),
+          ),
+      ]
+    );
+  }
+  
+  Widget jurAndFakUser(String text){
+        return Row(
+      children: [
+        Container(
+          child: Icon(
+            Icons.business,
+            size: 30,
+          ),
+        ),
+        SizedBox(
+          width: 30,
+        ),
+        Container(
+          child: Text(
+            '$text',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w400
+              ),
+            ),
+          ),
+      ]
+    );
+  }
+  
+  Widget isiDataDiri(String mail,nomormah,jurus,fakul) {
+  return Column(
+      children: <Widget> [
+        // Container(
+        //   child: Icon(
+        //     Icons.email,
+        //     size: 30,
+        //   ),
+        // ),
+        // SizedBox(
+        //   width: 30,
+        // ),
+        // Container(
+        //   child: Text(
+        //     '$isi',
+        //     style: GoogleFonts.poppins(
+        //       fontSize: 18,
+        //       fontWeight: FontWeight.w400
+        //       ),
+        //     ),
+        // ),
+        emailUser(mail),
+        SizedBox(
+          height: 30,
+        ),
+        nimUser(nomormah),
+                SizedBox(
+          height: 30,
+        ),
+        jurAndFakUser(jurus),
+                SizedBox(
+          height: 30,
+        ),
+        jurAndFakUser(fakul),
+                SizedBox(
+          height: 30,
         ),
       ],
     );
   }
+
+  List<IconData> icons = [Icons.person, Icons.home, Icons.notifications];
 
   @override
   Widget build(BuildContext context) {
@@ -179,8 +273,10 @@ class _UserPageState extends State<UserPage> {
       backgroundColor: Color(0xFFFF9559),
           body: SafeArea(
       child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
+              // Bagian atas (Foto,Nama Edit)
               Container(
                 width: 375,
                 padding: EdgeInsets.symmetric(vertical: 50),
@@ -206,7 +302,7 @@ class _UserPageState extends State<UserPage> {
                         children: [
                           Container(
                             // color: Colors.black,
-                            width: 275,
+                            width: 250,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -227,9 +323,48 @@ class _UserPageState extends State<UserPage> {
                             // color: Colors.black,
                             child: Column(
                               children: [
-                                isiDataDiri(),
-                                isiDataDiri(),
-                                isiDataDiri(),
+                                // Container(
+                                //   child: ListView(  
+                                //     children: <Widget> [
+                                //     ListTile(
+                                //       leading: Icon(Icons.email,
+                                //         color: Colors.black,),
+                                //       title: Text(
+                                //       'Bebas',
+                                //       style: GoogleFonts.poppins(
+                                //         fontSize: 18,
+                                //         fontWeight: FontWeight.w400
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     ]
+                                //   ),
+                                // )
+                                Visibility(
+                                  visible: menuDataDiri,
+                                  child: Container(
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      separatorBuilder: (BuildContext context, int index) =>
+                                          Divider(
+                                        color: Colors.grey,
+                                        thickness: 0.5,
+                                      ),
+                                      itemCount: listIsiDataDiri.length,
+                                      itemBuilder: (context, int index) {
+                                        return isiDataDiri(
+                                          listIsiDataDiri[index].email,
+                                          listIsiDataDiri[index].nim,
+                                          listIsiDataDiri[index].jurusan,
+                                          listIsiDataDiri[index].fakultas,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                )
+                                // SizedBox(
+                                //   height: 10,
+                                // ), 
                               ],
                             ),
                           )
@@ -238,7 +373,8 @@ class _UserPageState extends State<UserPage> {
                     ),
                   ),
                 width: double.infinity,
-                height: 700,
+                height: 625,
+                // height: MediaQuery.of(context).size.height,
               ),
             ],
           ),
@@ -248,9 +384,13 @@ class _UserPageState extends State<UserPage> {
   }
 }
 
-// class DataDiri {
-//   String penjelasan;
-//   IconData icon;
+class DataDiri {
+  late String email,nim,jurusan,fakultas;
 
-//   DataDiri({required this.icon, required this.penjelasan});
-// }
+  DataDiri({
+    required this.email, 
+    required this.nim,
+    required this.jurusan,
+    required this.fakultas,
+  });
+}
