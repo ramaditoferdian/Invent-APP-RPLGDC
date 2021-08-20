@@ -57,7 +57,7 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
               style: GoogleFonts.poppins(
                 color: Colors.black.withOpacity(0.68),
                 fontSize: 13,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),
@@ -101,10 +101,10 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   'Raihan',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -136,10 +136,10 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   '1302567490',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -171,10 +171,10 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   'S1 Informatika',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -206,10 +206,10 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   'Informatika',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -241,10 +241,10 @@ class DetailBarangDipinjamState extends State<DetailBarangDipinjam> {
                   '15/03/21 - 21/03/21',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
