@@ -273,7 +273,7 @@ class _UserPageState extends State<UserPage> {
       backgroundColor: Color(0xFFFF9559),
           body: SafeArea(
       child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
               // Bagian atas (Foto,Nama Edit)
@@ -344,6 +344,7 @@ class _UserPageState extends State<UserPage> {
                                   visible: menuDataDiri,
                                   child: Container(
                                     child: ListView.separated(
+                                      physics: const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       separatorBuilder: (BuildContext context, int index) =>
                                           Divider(
