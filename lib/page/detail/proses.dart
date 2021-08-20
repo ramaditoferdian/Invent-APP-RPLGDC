@@ -57,7 +57,7 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
               style: GoogleFonts.poppins(
                 color: Colors.black.withOpacity(0.68),
                 fontSize: 13,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),
@@ -101,10 +101,10 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
                   'Raihan',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -136,10 +136,10 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
                   '1302567490',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -171,10 +171,10 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
                   'S1 Informatika',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -206,10 +206,10 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
                   'Informatika',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -241,10 +241,10 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
                   '15/03/21 - 21/03/21',
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
+                  style: GoogleFonts.roboto(
+                    color: Colors.black.withOpacity(0.68),
                     fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -438,13 +438,18 @@ class DetailProsesBarangState extends State<DetailProsesBarang> {
       children: [
         Stack(
           children: <Widget>[
-            Container(
-              height: 200,
-              color: Colors.white,
-              child: Center(
-                child: Image.asset(
-                  'images/mouse.png',
-                  fit: BoxFit.fill,
+            GestureDetector(
+              onTap: () {
+                print('Image Clicked');
+              },
+              child: Container(
+                height: 200,
+                color: Colors.white,
+                child: Center(
+                  child: Image.asset(
+                    'images/mouse.png',
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),

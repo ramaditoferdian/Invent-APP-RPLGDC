@@ -1,4 +1,6 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, deprecated_member_use
+
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +16,12 @@ class HalamanUtama extends StatefulWidget {
   @override
   _HalamanUtamaState createState() => _HalamanUtamaState();
 }
+
+bool isClicked = true;
+bool menu1 = true;
+bool menu2 = false;
+bool menu3 = false;
+bool menu4 = false;
 
 class _HalamanUtamaState extends State<HalamanUtama> {
   late ScrollController controller;
@@ -36,6 +44,30 @@ class _HalamanUtamaState extends State<HalamanUtama> {
 
     controller.animateTo(end,
         duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+  }
+
+  void showDialogFaB() {
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.25),
+      transitionDuration: Duration(milliseconds: 500),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return FaB();
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return BackdropFilter(
+          filter:
+              ImageFilter.blur(sigmaX: 1 * anim.value, sigmaY: 1 * anim.value),
+          child: SlideTransition(
+            position:
+                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+            child: child,
+          ),
+        );
+      },
+    );
   }
 
   // DATA DUMMY
@@ -166,12 +198,6 @@ class _HalamanUtamaState extends State<HalamanUtama> {
 // ========================================================================== //
 
   final fieldTextSearch = TextEditingController();
-
-  bool isClicked = true;
-  bool menu1 = true;
-  bool menu2 = false;
-  bool menu3 = false;
-  bool menu4 = false;
 
   Widget userAccount() {
     double _size = 45;
@@ -1049,18 +1075,31 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           // Tamplikan Ketika berada pada Menu Data Barang
           visible: menu1,
           child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 5,
+                  blurRadius: 20,
+                  offset: Offset(1, 3), // changes position of shadow
+                ),
+              ],
+            ),
             height: 55,
             child: OutlinedButton(
               onPressed: () {
-                print("Add Barang");
+                setState(() {
+                  print("Add Barang");
+                  showDialogFaB();
+                });
               },
               style: OutlinedButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor: Colors.white,
-                  side: BorderSide(width: 2.0, color: Colors.black),
+                  side: BorderSide(width: 1.5, color: Colors.black),
                   shape: CircleBorder()),
               child: Icon(
-                Icons.add,
+                Icons.menu,
                 color: Colors.black,
                 size: 30,
               ),
@@ -1101,4 +1140,123 @@ class Pending {
     required this.borrower,
     required this.image,
   });
+}
+
+class FaB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 15, 15),
+      // FLOATING ACTION BUTTON dalam bentuk RaisedButton
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            width: 220,
+            height: 50,
+            child: RaisedButton(
+              padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              onPressed: () {
+                print("Managemen Barang");
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 50,
+                    child: Material(
+                      color: Color.fromRGBO(227, 227, 227, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Container(
+                        child: Image.asset("assets/fab/management_barang.png"),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Managemen Barang",
+                    style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.black.withOpacity(0),
+            height: 25,
+          ),
+          Container(
+            width: 190,
+            height: 50,
+            child: RaisedButton(
+              padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              onPressed: () {
+                print("Tambah Barang");
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 50,
+                    child: Material(
+                      color: Color.fromRGBO(227, 227, 227, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Container(
+                        child: Image.asset("assets/fab/tambah_barang.png"),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Tambah Barang",
+                    style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.black.withOpacity(0),
+            height: 25,
+          ),
+          Container(
+            height: 55,
+            child: OutlinedButton(
+              onPressed: () {
+                print("Close");
+                Navigator.pop(context, true);
+              },
+              style: OutlinedButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.white,
+                  side: BorderSide(width: 1, color: Colors.black),
+                  shape: CircleBorder()),
+              child: Icon(
+                Icons.close,
+                color: Colors.black,
+                size: 30,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

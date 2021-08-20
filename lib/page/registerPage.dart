@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Nama Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -162,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Email Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -208,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'NIP Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -254,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'NIM Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -300,7 +300,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Jurusan Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -346,7 +346,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Fakultas Required';
+            return '';
           }
         },
         onSaved: (value) {
@@ -373,7 +373,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget buildPassword() {
     return Container(
-      margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
+      margin: EdgeInsets.fromLTRB(15, 25, 15, 10),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -425,7 +425,7 @@ class _RegisterPageState extends State<RegisterPage> {
           suffixIcon: validasiPassword
               ? Icon(
                   Icons.error,
-                  color: Colors.black,
+                  color: Color(0xFFC90000),
                 )
               : null,
         ),
@@ -435,7 +435,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget buildSignUpButton() {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 30, 20, 0),
+      margin: EdgeInsets.fromLTRB(0, 10, 20, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -474,6 +474,30 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget textAttention() {
+    return Column(
+      children: [
+        Visibility(
+          visible: validasiPassword,
+          child: Text(
+            'Password harus 8 karater dan berisi angka , simbol , huruf kapital.',
+            style: GoogleFonts.poppins(
+              color: Color(0xFFFE2929),
+              fontSize: 10,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        Visibility(
+          visible: !validasiPassword,
+          child: Padding(
+            padding: EdgeInsets.only(top: 15),
+          ),
+        ),
+      ],
     );
   }
 
@@ -588,6 +612,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (!isDosen) buildJurusan(),
                     buildFakultas(),
                     buildPassword(),
+                    textAttention(),
                     buildSignUpButton(),
                   ],
                 ),
