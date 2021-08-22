@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
 import 'package:inventory_app/page/detail/proses.dart';
+import 'package:inventory_app/page/user/userPage.dart';
 
 import 'detail/dataPinjam.dart';
 
@@ -238,6 +239,10 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     return GestureDetector(
       onTap: () {
         print("akun");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UserPage()),
+        );
       },
       child: Container(
         height: _size,
