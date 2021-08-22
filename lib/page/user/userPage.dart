@@ -254,11 +254,13 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFF9559),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
+
+          body: SafeArea(
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+
               // Bagian atas (Foto,Nama Edit)
               Container(
                 width: 375,
@@ -295,47 +297,52 @@ class _UserPageState extends State<UserPage> {
                               historyItemIcon()
                             ],
                           ),
-                        ),
-                        Divider(
-                          height: 1,
-                          color: Colors.grey,
-                        ),
-                        Container(
-                          // width: 300,
-                          // height: 100,
-                          margin: EdgeInsets.fromLTRB(40, 35, 15, 0),
-                          // color: Colors.black,
-                          child: Column(
-                            children: [
-                              // Container(
-                              //   child: ListView(
-                              //     children: <Widget> [
-                              //     ListTile(
-                              //       leading: Icon(Icons.email,
-                              //         color: Colors.black,),
-                              //       title: Text(
-                              //       'Bebas',
-                              //       style: GoogleFonts.poppins(
-                              //         fontSize: 18,
-                              //         fontWeight: FontWeight.w400
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     ]
-                              //   ),
-                              // )
-                              Visibility(
-                                visible: menuDataDiri,
-                                child: Container(
-                                  child: ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) =>
-                                            Divider(
-                                      color: Colors.grey,
-                                      thickness: 0.5,
+
+                          Container(
+                            // width: 300,
+                            // height: 100,
+                            margin: EdgeInsets.fromLTRB(40, 35, 15, 0),
+                            // color: Colors.black,
+                            child: Column(
+                              children: [
+                                // Container(
+                                //   child: ListView(  
+                                //     children: <Widget> [
+                                //     ListTile(
+                                //       leading: Icon(Icons.email,
+                                //         color: Colors.black,),
+                                //       title: Text(
+                                //       'Bebas',
+                                //       style: GoogleFonts.poppins(
+                                //         fontSize: 18,
+                                //         fontWeight: FontWeight.w400
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     ]
+                                //   ),
+                                // )
+                                Visibility(
+                                  visible: menuDataDiri,
+                                  child: Container(
+                                    child: ListView.separated(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      separatorBuilder: (BuildContext context, int index) =>
+                                          Divider(
+                                        color: Colors.grey,
+                                        thickness: 0.5,
+                                      ),
+                                      itemCount: listIsiDataDiri.length,
+                                      itemBuilder: (context, int index) {
+                                        return isiDataDiri(
+                                          listIsiDataDiri[index].email,
+                                          listIsiDataDiri[index].nim,
+                                          listIsiDataDiri[index].jurusan,
+                                          listIsiDataDiri[index].fakultas,
+                                        );
+                                      },
+
                                     ),
                                     itemCount: listIsiDataDiri.length,
                                     itemBuilder: (context, int index) {
