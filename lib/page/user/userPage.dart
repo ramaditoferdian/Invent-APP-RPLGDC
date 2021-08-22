@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UserPage extends StatefulWidget {
-  const UserPage({ Key? key }) : super(key: key);
+  const UserPage({Key? key}) : super(key: key);
 
   @override
   _UserPageState createState() => _UserPageState();
@@ -13,13 +13,13 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   List<DataDiri> listIsiDataDiri = [
     DataDiri(
-      email:'adi@mail.com',
+      email: 'adi@mail.com',
       nim: '1301194084',
       jurusan: 'Informatika',
       fakultas: 'FIF',
     ),
   ];
- // =========================================== //
+  // =========================================== //
 
   bool isClicked = true;
   bool menuDataDiri = true;
@@ -71,7 +71,7 @@ class _UserPageState extends State<UserPage> {
       ),
     );
   }
-  
+
   Widget personKecilIcon() {
     return OutlinedButton(
       onPressed: () {
@@ -85,8 +85,7 @@ class _UserPageState extends State<UserPage> {
           primary: Colors.white,
           // backgroundColor: Colors.white,
           side: BorderSide(
-            width: 2.0, 
-            color: menuDataDiri ? Colors.black : Colors.grey),
+              width: 2.0, color: menuDataDiri ? Colors.black : Colors.grey),
           shape: CircleBorder()),
       child: Icon(
         Icons.person,
@@ -101,18 +100,18 @@ class _UserPageState extends State<UserPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Falia Aniya',
-          style: GoogleFonts.poppins(
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
+          Text(
+            'Falia Aniya',
+            style: GoogleFonts.poppins(
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.left,
           ),
-          Text('Mahasiswa/Dosen',
-            style: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w300
-            ),
+          Text(
+            'Mahasiswa/Dosen',
+            style:
+                GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w300),
             textAlign: TextAlign.left,
           ),
         ],
@@ -130,103 +129,87 @@ class _UserPageState extends State<UserPage> {
         });
       },
       child: Icon(
-          Icons.history,
-          size: 40,
-          color: menuHistory ? Colors.black : Colors.grey,
-        ),
+        Icons.history,
+        size: 40,
+        color: menuHistory ? Colors.black : Colors.grey,
+      ),
     );
-  }
-  
-  Widget dividerKuning() {
-    return Container(
-      height: 60, 
-      child: VerticalDivider(
-        thickness: 1,
-        // indent: 1,
-        // endIndent:0,
-        color: Colors.grey
-        ),
-      );
   }
 
-  Widget emailUser(String text){
-    return Row(
-      children: [
-        Container(
-          child: Icon(
-            Icons.email,
-            size: 30,
-          ),
-        ),
-        SizedBox(
-          width: 30,
-        ),
-        Container(
-          child: Text(
-            '$text',
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w400
-              ),
-            ),
-          ),
-      ]
+  Widget dividerKuning() {
+    return Container(
+      height: 60,
+      child: VerticalDivider(
+          thickness: 1,
+          // indent: 1,
+          // endIndent:0,
+          color: Colors.grey),
     );
   }
-  
-  Widget nimUser(String text){
-    return Row(
-      children: [
-        Container(
-          child: Icon(
-            Icons.badge_outlined,
-            size: 30,
-          ),
+
+  Widget emailUser(String text) {
+    return Row(children: [
+      Container(
+        child: Icon(
+          Icons.email,
+          size: 30,
         ),
-        SizedBox(
-          width: 30,
+      ),
+      SizedBox(
+        width: 30,
+      ),
+      Container(
+        child: Text(
+          '$text',
+          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w400),
         ),
-        Container(
-          child: Text(
-            '$text',
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w400
-              ),
-            ),
-          ),
-      ]
-    );
+      ),
+    ]);
   }
-  
-  Widget jurAndFakUser(String text){
-        return Row(
-      children: [
-        Container(
-          child: Icon(
-            Icons.business,
-            size: 30,
-          ),
+
+  Widget nimUser(String text) {
+    return Row(children: [
+      Container(
+        child: Icon(
+          Icons.badge_outlined,
+          size: 30,
         ),
-        SizedBox(
-          width: 30,
+      ),
+      SizedBox(
+        width: 30,
+      ),
+      Container(
+        child: Text(
+          '$text',
+          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w400),
         ),
-        Container(
-          child: Text(
-            '$text',
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w400
-              ),
-            ),
-          ),
-      ]
-    );
+      ),
+    ]);
   }
-  
-  Widget isiDataDiri(String mail,nomormah,jurus,fakul) {
-  return Column(
-      children: <Widget> [
+
+  Widget jurAndFakUser(String text) {
+    return Row(children: [
+      Container(
+        child: Icon(
+          Icons.business,
+          size: 30,
+        ),
+      ),
+      SizedBox(
+        width: 30,
+      ),
+      Container(
+        child: Text(
+          '$text',
+          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w400),
+        ),
+      ),
+    ]);
+  }
+
+  Widget isiDataDiri(String mail, nomormah, jurus, fakul) {
+    return Column(
+      children: <Widget>[
         // Container(
         //   child: Icon(
         //     Icons.email,
@@ -250,15 +233,15 @@ class _UserPageState extends State<UserPage> {
           height: 30,
         ),
         nimUser(nomormah),
-                SizedBox(
+        SizedBox(
           height: 30,
         ),
         jurAndFakUser(jurus),
-                SizedBox(
+        SizedBox(
           height: 30,
         ),
         jurAndFakUser(fakul),
-                SizedBox(
+        SizedBox(
           height: 30,
         ),
       ],
@@ -271,11 +254,13 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFF9559),
+
           body: SafeArea(
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
+
               // Bagian atas (Foto,Nama Edit)
               Container(
                 width: 375,
@@ -290,32 +275,29 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               Container(
-                child:ClipRRect(
+                child: ClipRRect(
                   // borderRadius: BorderRadius.circular(50.0),
                   child: Container(
                     // margin: const EdgeInsets.only(top: 10.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(50.0)),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(50.0)),
                       color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            // color: Colors.black,
-                            width: 250,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                personKecilIcon(),
-                                dividerKuning(),
-                                historyItemIcon()
-                              ],
-                            ),
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          // color: Colors.black,
+                          width: 250,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              personKecilIcon(),
+                              dividerKuning(),
+                              historyItemIcon()
+                            ],
                           ),
-                          Divider(
-                            height: 1,
-                            color: Colors.grey,
-                          ),
+
                           Container(
                             // width: 300,
                             // height: 100,
@@ -360,19 +342,30 @@ class _UserPageState extends State<UserPage> {
                                           listIsiDataDiri[index].fakultas,
                                         );
                                       },
+
                                     ),
+                                    itemCount: listIsiDataDiri.length,
+                                    itemBuilder: (context, int index) {
+                                      return isiDataDiri(
+                                        listIsiDataDiri[index].email,
+                                        listIsiDataDiri[index].nim,
+                                        listIsiDataDiri[index].jurusan,
+                                        listIsiDataDiri[index].fakultas,
+                                      );
+                                    },
                                   ),
-                                )
-                                // SizedBox(
-                                //   height: 10,
-                                // ), 
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                                ),
+                              )
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
+                ),
                 width: double.infinity,
                 height: 625,
                 // height: MediaQuery.of(context).size.height,
@@ -386,10 +379,10 @@ class _UserPageState extends State<UserPage> {
 }
 
 class DataDiri {
-  late String email,nim,jurusan,fakultas;
+  late String email, nim, jurusan, fakultas;
 
   DataDiri({
-    required this.email, 
+    required this.email,
     required this.nim,
     required this.jurusan,
     required this.fakultas,

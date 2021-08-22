@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, deprecated_member_use
+// ignore_for_file: non_constant_identifier_names, deprecated_member_use, camel_case_types
 
 import 'dart:ui';
 
@@ -196,9 +196,42 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     ),
   ];
 
+  List<Borrower_On_RekapBarang> peminjamRekapBarang = [
+    Borrower_On_RekapBarang(
+      borrower: 'Raihan',
+    ),
+    Borrower_On_RekapBarang(
+      borrower: 'Aurelia',
+    ),
+    Borrower_On_RekapBarang(
+      borrower: 'Bambang',
+    ),
+  ];
+
 // ========================================================================== //
 
   final fieldTextSearch = TextEditingController();
+
+  Widget forwardButton() {
+    return Container(
+      alignment: Alignment.topLeft, // komen
+      child: RotatedBox(
+        quarterTurns: 2,
+        child: IconButton(
+          padding: EdgeInsets.all(0),
+          icon: Icon(
+            Icons.chevron_left,
+          ),
+          iconSize: 30,
+          color: Colors.black,
+          onPressed: () {
+            // Navigator.pop(context);
+            print('forward button');
+          },
+        ),
+      ),
+    );
+  }
 
   Widget userAccount() {
     double _size = 45;
@@ -306,6 +339,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
+// NAVIGATION
   Widget dataBarangHead() {
     return GestureDetector(
       onTap: () {
@@ -460,6 +494,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
+// MENU CARD
   Widget menuCard_dataBarang(String nama, kategori, banyak, image) {
     return GestureDetector(
       onTap: () {
@@ -912,6 +947,87 @@ class _HalamanUtamaState extends State<HalamanUtama> {
     );
   }
 
+  Widget menuCard_rekapBarang(String number, peminjam) {
+    return GestureDetector(
+      onTap: () {
+        print('Menu Card Rekap Barang');
+
+        //print(MediaQuery.of(context).size.height * 0.15);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => DetailBarangDipinjam()),
+        // );
+      },
+      child: Container(
+        // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15), //top: 10, bottom: 10),
+        // height: MediaQuery.of(context).size.height * 0.15,
+        // width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: [
+                Container(
+                  width: 45,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.horizontal(
+                      left: Radius.circular(10),
+                    ),
+                    color: Colors.amber,
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    // color: Colors.amber,
+                    width: 95,
+                    child: Text(
+                      number,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15),
+                  // alignment: Alignment.center,
+                  // color: Colors.amber,
+                  width: 95,
+                  child: Text(
+                    peminjam,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            forwardButton()
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1019,20 +1135,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                       top: MediaQuery.of(context).size.height / 4,
                       left: 15,
                       right: 15),
-                  // child: ListView.separated(
-                  //   shrinkWrap: true,
-                  //   separatorBuilder: (BuildContext context, int index) =>
-                  //       Divider(),
-                  //   itemCount: prosesBarang.length,
-                  //   itemBuilder: (context, int index) {
-                  //     return menuCard_prosesBarang(
-                  //       prosesBarang[index].name,
-                  //       prosesBarang[index].request_date,
-                  //       prosesBarang[index].borrower,
-                  //       prosesBarang[index].image,
-                  //     );
-                  //   },
-                  // ),
+
                   child: GridView.count(
                     mainAxisSpacing: 15,
                     crossAxisSpacing: 10,
@@ -1072,7 +1175,27 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                   ),
                 ),
               ),
-              // TOMBOL BACK
+              Visibility(
+                visible: menu4,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 4,
+                  ),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(),
+                    itemCount: peminjamRekapBarang.length,
+                    itemBuilder: (context, int index) {
+                      return menuCard_rekapBarang(
+                        (index + 1).toString(),
+                        peminjamRekapBarang[index].borrower,
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -1094,7 +1217,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
             child: OutlinedButton(
               onPressed: () {
                 setState(() {
-                  print("Add Barang");
+                  print("FAB");
                   showDialogFaB();
                 });
               },
@@ -1144,6 +1267,14 @@ class Pending {
     required this.request_date,
     required this.borrower,
     required this.image,
+  });
+}
+
+class Borrower_On_RekapBarang {
+  late String borrower;
+
+  Borrower_On_RekapBarang({
+    required this.borrower,
   });
 }
 
