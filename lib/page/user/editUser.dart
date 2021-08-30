@@ -12,11 +12,29 @@ class EditUser extends StatefulWidget {
 
 class _EditUserState extends State<EditUser> {
 
-  Widget userLogo() {
+  Widget silangButton() {
+    return Container(
+      //padding: EdgeInsets.all(50),
+      alignment: Alignment.topLeft, // komen
+      child: IconButton(
+        icon: Icon(
+          Icons.clear,
+        ),
+        iconSize: 50,
+        color: Colors.black,
+        onPressed: () {
+          Navigator.pop(context);
+          print('Back Button');
+        },
+      ),
+    );
+  }
+
+  Widget iconUser() {
     double _size = 100;
     return GestureDetector(
       onTap: () {
-        print("akun");
+        print("User");
       },
       child: Container(
         height: _size,
@@ -43,9 +61,38 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  // Widget userCamera(){
-  //   return 
-  // }
+  Widget iconCamera(){
+    return GestureDetector(
+      onTap: () {
+        print('camera infront of user');
+      },
+      child: Container(
+        width: 30,
+        height: 30,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Colors.black)
+            ),
+        margin: EdgeInsets.fromLTRB(225, 70, 0, 0),
+        // alignment: Alignment.center,
+        child: Icon(
+          Icons.camera_alt,
+          size: 20,
+        )
+      )
+    );
+  }
+  
+  Widget userLogoCameraJadiSatu() {
+    return Stack(
+      children: [
+        iconUser(),
+        iconCamera()
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,16 +101,12 @@ class _EditUserState extends State<EditUser> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Stack(
-                children: [
-                  userLogo(),
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    child: Icon(
-                      Icons.camera
-                    )
-                  )
-                ],
+              silangButton(),
+              userLogoCameraJadiSatu(),
+              Container(
+                color: Colors.black,
+                width: 350,
+                child: Text('data'),
               )
             ],
           ),
