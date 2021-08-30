@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/user/editUser.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -49,8 +50,8 @@ class _UserPageState extends State<UserPage> {
       warna : Color(0xFFC4C4C4)
     )
   ];
+  
   // =========================================== //
-
   bool isClicked = true;
   bool menuDataDiri = true;
   bool menuHistory = false;
@@ -88,6 +89,7 @@ class _UserPageState extends State<UserPage> {
     return OutlinedButton(
       onPressed: () {
         print("Edit User");
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditUser()));
       },
       style: OutlinedButton.styleFrom(
           primary: Colors.white,
