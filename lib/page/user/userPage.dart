@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/user/editUser.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -19,15 +20,41 @@ class _UserPageState extends State<UserPage> {
       fakultas: 'FIF',
     ),
   ];
-  // =========================================== //
 
+  List<DataPinjam> listHistoryBarang = [
+    DataPinjam(
+        gambar: 'images/laptop_asus.png',
+        nama: 'Asus VivoBook S14',
+        kodeUnit: 'AVD14-1',
+        tanggal: '12/05/01',
+        oleh: 'Falia',
+        status: 'Pinjam',
+        warna: Color(0xFF2EDE8A)),
+    DataPinjam(
+        gambar: 'images/whiteboard.jpg',
+        nama: 'Whiteboard',
+        kodeUnit: 'AVS14-1',
+        tanggal: '10/04/21',
+        oleh: 'Falia',
+        status: 'Kembali',
+        warna: Color(0xFFC4C4C4)),
+    DataPinjam(
+        gambar: 'images/wacom.png',
+        nama: 'Tablet Wacom Intous',
+        kodeUnit: 'PTWI-11',
+        tanggal: '12/05/01',
+        oleh: 'Aliya',
+        status: 'Kembali',
+        warna: Color(0xFFC4C4C4))
+  ];
+
+  // =========================================== //
   bool isClicked = true;
   bool menuDataDiri = true;
   bool menuHistory = false;
 
   Widget userAccount() {
     double _size = 85;
-
     return GestureDetector(
       onTap: () {
         print("akun");
@@ -58,6 +85,8 @@ class _UserPageState extends State<UserPage> {
     return OutlinedButton(
       onPressed: () {
         print("Edit User");
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => EditUser()));
       },
       style: OutlinedButton.styleFrom(
           primary: Colors.white,
@@ -136,7 +165,7 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget dividerKuning() {
+  Widget verDiv() {
     return Container(
       height: 60,
       child: VerticalDivider(
@@ -145,6 +174,17 @@ class _UserPageState extends State<UserPage> {
           // endIndent:0,
           color: Colors.grey),
     );
+  }
+
+  Widget verDivVer2() {
+    return Container(
+        height: 40,
+        child: VerticalDivider(
+          thickness: 1,
+          // indent: 1,
+          // endIndent:0,
+          color: Color(0xFFffc28a),
+        ));
   }
 
   Widget emailUser(String text) {
@@ -210,24 +250,6 @@ class _UserPageState extends State<UserPage> {
   Widget isiDataDiri(String mail, nomormah, jurus, fakul) {
     return Column(
       children: <Widget>[
-        // Container(
-        //   child: Icon(
-        //     Icons.email,
-        //     size: 30,
-        //   ),
-        // ),
-        // SizedBox(
-        //   width: 30,
-        // ),
-        // Container(
-        //   child: Text(
-        //     '$isi',
-        //     style: GoogleFonts.poppins(
-        //       fontSize: 18,
-        //       fontWeight: FontWeight.w400
-        //       ),
-        //     ),
-        // ),
         emailUser(mail),
         SizedBox(
           height: 30,
@@ -244,6 +266,146 @@ class _UserPageState extends State<UserPage> {
         SizedBox(
           height: 30,
         ),
+      ],
+    );
+  }
+
+  Widget untukSatuBarang(
+      String gambar, nama, kode, tanggal, oleh, status, Color warna) {
+    return Column(
+      children: [
+        Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
+            height: 125,
+            child: Row(
+              children: [
+                // Gambar
+                Container(
+                  child: Image.asset(
+                    '$gambar',
+                    width: 80,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                // Nama dan Detail
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  width: 225,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15),
+                      // Nama Barang
+                      Container(
+                        child: Text(
+                          '$nama',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.roboto(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // Detail Barang
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  'Kode Unit',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$kode',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            verDivVer2(),
+                            Column(
+                              children: [
+                                Text(
+                                  'Tanggal',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$tanggal',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            verDivVer2(),
+                            Column(
+                              children: [
+                                Text(
+                                  'Oleh',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$oleh',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 0, 0, 72),
+                  child: Text(' $status '),
+                  decoration: BoxDecoration(
+                    color: warna,
+                    border: Border.all(
+                      color: warna,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ],
+            )),
+        Divider(
+          color: Colors.grey,
+          height: 1,
+        )
       ],
     );
   }
@@ -291,7 +453,7 @@ class _UserPageState extends State<UserPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               personKecilIcon(),
-                              dividerKuning(),
+                              verDiv(),
                               historyItemIcon()
                             ],
                           ),
@@ -303,30 +465,13 @@ class _UserPageState extends State<UserPage> {
                         Container(
                           // width: 300,
                           // height: 100,
-                          margin: EdgeInsets.fromLTRB(40, 35, 15, 0),
                           // color: Colors.black,
                           child: Column(
                             children: [
-                              // Container(
-                              //   child: ListView(
-                              //     children: <Widget> [
-                              //     ListTile(
-                              //       leading: Icon(Icons.email,
-                              //         color: Colors.black,),
-                              //       title: Text(
-                              //       'Bebas',
-                              //       style: GoogleFonts.poppins(
-                              //         fontSize: 18,
-                              //         fontWeight: FontWeight.w400
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     ]
-                              //   ),
-                              // )
                               Visibility(
                                 visible: menuDataDiri,
                                 child: Container(
+                                  margin: EdgeInsets.fromLTRB(40, 30, 15, 0),
                                   child: ListView.separated(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
@@ -348,13 +493,34 @@ class _UserPageState extends State<UserPage> {
                                     },
                                   ),
                                 ),
+                              ),
+                              Visibility(
+                                visible: menuHistory,
+                                child: ListView.separated(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          Divider(
+                                    height: 0,
+                                  ),
+                                  itemCount: listHistoryBarang.length,
+                                  itemBuilder: (context, int index) {
+                                    return untukSatuBarang(
+                                      listHistoryBarang[index].gambar,
+                                      listHistoryBarang[index].nama,
+                                      listHistoryBarang[index].kodeUnit,
+                                      listHistoryBarang[index].tanggal,
+                                      listHistoryBarang[index].oleh,
+                                      listHistoryBarang[index].status,
+                                      listHistoryBarang[index].warna,
+                                    );
+                                  },
+                                ),
                               )
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -379,5 +545,19 @@ class DataDiri {
     required this.nim,
     required this.jurusan,
     required this.fakultas,
+  });
+}
+
+class DataPinjam {
+  late String gambar, nama, kodeUnit, tanggal, oleh, status;
+  Color warna;
+  DataPinjam({
+    required this.gambar,
+    required this.nama,
+    required this.kodeUnit,
+    required this.tanggal,
+    required this.oleh,
+    required this.status,
+    required this.warna,
   });
 }
