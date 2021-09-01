@@ -6,6 +6,7 @@ import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
 
 import 'package:flutter/services.dart';
+import 'package:inventory_app/page/user/editUser.dart';
 import 'package:inventory_app/page/user/userPage.dart';
 
 Future<void> main() async {

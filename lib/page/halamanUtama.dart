@@ -9,6 +9,7 @@ import 'package:inventory_app/page/detail/detailBarang.dart';
 import 'package:inventory_app/page/detail/proses.dart';
 import 'package:inventory_app/page/user/userPage.dart';
 
+
 import 'detail/dataPinjam.dart';
 
 class HalamanUtama extends StatefulWidget {
@@ -224,7 +225,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           ),
           iconSize: 30,
           color: Colors.black,
-          onPressed: () {
+          onPressed : () {
             // Navigator.pop(context);
             print('forward button');
           },
