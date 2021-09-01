@@ -167,29 +167,15 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget verDiv() {
+  Widget verDiv(double height, Color warna) {
     return Container(
-      height: 60,
+      height: height,
       child: VerticalDivider(
           thickness: 1,
-          // indent: 1,
-          // endIndent:0,
-          color: Colors.grey),
+          color: warna),
     );
   }
   
-  Widget verDivVer2() {
-    return Container(
-      height: 40,
-      child: VerticalDivider(
-          thickness: 1,
-          // indent: 1,
-          // endIndent:0,
-          color: Color(0xFFffc28a),
-      )
-    );
-  }
-
   Widget emailUser(String text) {
     return Row(children: [
       Container(
@@ -340,7 +326,7 @@ class _UserPageState extends State<UserPage> {
                                 ),)
                             ],
                           ),
-                          verDivVer2(),
+                          verDiv(40,Color(0xFFFFC28A)),
                           Column(
                             children: [
                               Text('Tanggal',
@@ -360,7 +346,7 @@ class _UserPageState extends State<UserPage> {
                                 ),)
                             ],
                           ),
-                          verDivVer2(),
+                          verDiv(40,Color(0xFFFFC28A)),
                           Column(
                             children: [
                               Text('Oleh',
@@ -453,7 +439,7 @@ class _UserPageState extends State<UserPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               personKecilIcon(),
-                              verDiv(),
+                              verDiv(60,Colors.grey),
                               historyItemIcon()
                             ],
                           ),
