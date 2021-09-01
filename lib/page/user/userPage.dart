@@ -20,7 +20,7 @@ class _UserPageState extends State<UserPage> {
       fakultas: 'FIF',
     ),
   ];
-
+  
   List<DataPinjam> listHistoryBarang = [
     DataPinjam(
       gambar : 'images/laptop_asus.png',
@@ -58,7 +58,6 @@ class _UserPageState extends State<UserPage> {
 
   Widget userAccount() {
     double _size = 85;
-
     return GestureDetector(
       onTap: () {
         print("akun");

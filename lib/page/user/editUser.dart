@@ -93,7 +93,80 @@ class _EditUserState extends State<EditUser> {
       ],
     );
   }
+
+  Widget buildTextField(String labelText, placeholder, bool isPasswordTextField) {
+
+    return  Padding(
+      padding: EdgeInsets.only(bottom: 30),
+      child: TextField(
+        obscureText: isPasswordTextField ? isObsecurePassword : false,
+        decoration: InputDecoration(
+          suffixIcon: isPasswordTextField ? 
+            IconButton(
+              onPressed: () {}, 
+              icon: Icon(Icons.remove_red_eye, color: Colors.grey,)
+            ):null,
+          contentPadding: EdgeInsets.only(bottom: 5),
+          labelText: labelText,
+          labelStyle: GoogleFonts.poppins(
+            height: 1,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 1.5,
+            color: Colors.grey
+          ),
+           floatingLabelBehavior: FloatingLabelBehavior.always,
+           hintText: placeholder,
+           hintStyle: GoogleFonts.poppins(
+             fontSize: 15,
+             fontWeight: FontWeight.w500,
+             color: Colors.grey
+           )
+        ),
+      ),
+    );
+  }
+  
+  Widget buildTextJadiSatu() {
+    return Container(
+      width: 350,
+      child: Column(
+        children: [
+          buildTextField("Nama","Falia Aniya",false),
+          buildTextField("Email","faliaan@gmail.com",false),
+          buildTextField("NIM","1234567890",false),
+          buildTextField("Jurusan","Sistem Informasi",false),
+          buildTextField("Fakultas","Rekayasa Industri",false),
+          buildTextField("Password","••••••",true)
+        ],
+      ),
+    );
+  }
+  
+  Widget buildSimpanButton() {
+    return OutlinedButton(
+    onPressed: () {
+      print("Simpan di click");
+    },
+    child: Text(
+      'Simpan',
+      style: GoogleFonts.poppins(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: Colors.black,
+        letterSpacing: 2
+        )),
+    style: OutlinedButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: 75),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      side: BorderSide(
+        color: Colors.black)
+      ),
+    );
+  }
   @override
+  bool isObsecurePassword = true;
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -103,11 +176,10 @@ class _EditUserState extends State<EditUser> {
             children: [
               silangButton(),
               userLogoCameraJadiSatu(),
-              Container(
-                color: Colors.black,
-                width: 350,
-                child: Text('data'),
-              )
+              SizedBox(height: 30),
+              buildTextJadiSatu(),
+              SizedBox(height: 20),
+              buildSimpanButton()
             ],
           ),
         ),
