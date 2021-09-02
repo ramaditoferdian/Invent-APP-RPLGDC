@@ -2,13 +2,13 @@
 
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
 import 'package:inventory_app/page/detail/proses.dart';
 import 'package:inventory_app/page/user/userPage.dart';
-
 
 import 'detail/dataPinjam.dart';
 
@@ -65,6 +65,32 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           child: SlideTransition(
             position:
                 Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+            child: child,
+          ),
+        );
+      },
+    );
+  }
+
+  void showDialogPopFilter() {
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.25),
+      transitionDuration: Duration(milliseconds: 500),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return PopFilter();
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return BackdropFilter(
+          filter:
+              ImageFilter.blur(sigmaX: 1 * anim.value, sigmaY: 1 * anim.value),
+          child: SlideTransition(
+            position: Tween(
+              begin: const Offset(1, 0),
+              end: const Offset(0, 0),
+            ).animate(anim),
             child: child,
           ),
         );
@@ -225,7 +251,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
           ),
           iconSize: 30,
           color: Colors.black,
-          onPressed : () {
+          onPressed: () {
             // Navigator.pop(context);
             print('forward button');
           },
@@ -272,6 +298,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
 
     return GestureDetector(
       onTap: () {
+        showDialogPopFilter();
         print("sort");
       },
       child: Container(
@@ -319,7 +346,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
         textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.only(left: 20, bottom: 8),
+            contentPadding: EdgeInsets.only(left: 20, bottom: 10),
             hintText: 'search...',
             hintStyle: GoogleFonts.poppins(
               color: Colors.black38,
@@ -598,11 +625,14 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                         Container(
                           child: Column(
                             children: <Widget>[
-                              Text('Kategori',
-                                  style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Color(0x8C000000))),
+                              Text(
+                                'Kategori',
+                                style: GoogleFonts.roboto(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Color(0x8C000000),
+                                ),
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -1396,4 +1426,499 @@ class FaB extends StatelessWidget {
       ),
     );
   }
+}
+
+class PopFilter extends StatefulWidget {
+  @override
+  State<PopFilter> createState() => _PopFilterState();
+}
+
+class _PopFilterState extends State<PopFilter> {
+  List<Kategori> category = [
+    Kategori(
+      title: 'Elektorik',
+      isChecked: false,
+    ),
+    Kategori(
+      title: 'Buku',
+      isChecked: false,
+    ),
+    Kategori(
+      title: 'Prasarana',
+      isChecked: false,
+    ),
+  ];
+
+  List<Kondisi> condition = [
+    Kondisi(
+      title: 'Good',
+      isChecked: false,
+    ),
+    Kondisi(
+      title: 'Poor',
+      isChecked: false,
+    ),
+    Kondisi(
+      title: 'Semua Kondisi',
+      isChecked: false,
+    ),
+  ];
+
+  List<TahunProduk> productYear = [
+    TahunProduk(
+      title: '2018',
+      isChecked: false,
+    ),
+    TahunProduk(
+      title: '2019',
+      isChecked: false,
+    ),
+    TahunProduk(
+      title: '2020',
+      isChecked: false,
+    ),
+    TahunProduk(
+      title: '2021',
+      isChecked: false,
+    ),
+  ];
+
+  Widget ListKategori(String title, bool diPilih) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+            bottom: 5,
+            left: 20,
+          ),
+          child: Text(
+            title,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w300,
+              fontSize: 13,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Checkbox(
+          value: diPilih,
+          onChanged: (bool? newValue) {
+            setState(() {
+              print(diPilih);
+              diPilih = newValue!;
+              print(diPilih);
+            });
+          },
+          activeColor: Colors.white,
+          checkColor: Colors.blue,
+        ),
+      ],
+    );
+  }
+
+  Widget buildButtonTerapkan() {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context, true);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          border: Border.all(color: Colors.white),
+          color: Color(0xFFEA340C),
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 5,
+          horizontal: 20,
+        ),
+        child: Text(
+          'Terapkan',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w300,
+            fontSize: 14,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildButtonBersihkan() {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          border: Border.all(color: Colors.black),
+          color: Colors.white,
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 5,
+          horizontal: 19,
+        ),
+        child: Text(
+          'Bersihkan',
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w300,
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(150, 100, 0, 150),
+      child: Material(
+        type: MaterialType.transparency,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.horizontal(
+              left: Radius.circular(10),
+            ),
+            color: Colors.white,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text(
+                  'Filter :',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                color: Color.fromRGBO(152, 152, 152, 0.11),
+                width: (MediaQuery.of(context).size.width * 1),
+                child: Text(
+                  'Kategori',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 5, right: 40, bottom: 5),
+                // color: Colors.amber,
+                // alignment: Alignment.center,
+                child: ListView.separated(
+                  padding: EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  separatorBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) =>
+                      Divider(
+                    height: 0,
+                  ),
+                  itemCount: category.length,
+                  itemBuilder: (context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                            bottom: 10,
+                            left: 25,
+                          ),
+                          child: Text(
+                            category[index].title,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                            // color: Colors.amber,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                          height: 18,
+                          width: 18,
+                          // color: Colors.amber,
+                          child: Transform.scale(
+                            scale: 0.7,
+                            child: Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white),
+                              child: Checkbox(
+                                value: category[index].isChecked,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    category[index].isChecked = val!;
+                                  });
+                                },
+                                activeColor: Colors.white,
+                                checkColor: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                color: Color.fromRGBO(152, 152, 152, 0.11),
+                width: (MediaQuery.of(context).size.width * 1),
+                child: Text(
+                  'Kondisi',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 5, right: 40, bottom: 5),
+                // color: Colors.amber,
+                // alignment: Alignment.center,
+                child: ListView.separated(
+                  padding: EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  separatorBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) =>
+                      Divider(
+                    height: 0,
+                  ),
+                  itemCount: condition.length,
+                  itemBuilder: (context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                            bottom: 10,
+                            left: 25,
+                          ),
+                          child: Text(
+                            condition[index].title,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                            // color: Colors.amber,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                          height: 18,
+                          width: 18,
+                          // color: Colors.amber,
+                          child: Transform.scale(
+                            scale: 0.7,
+                            child: Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white),
+                              child: Checkbox(
+                                value: condition[index].isChecked,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    // category[index].isChecked = val!;
+                                    if (index == 0) {
+                                      condition[0].isChecked = val!;
+                                      condition[1].isChecked = false;
+                                      condition[2].isChecked = false;
+                                      print('0');
+                                    } else if (index == 1) {
+                                      condition[0].isChecked = false;
+                                      condition[1].isChecked = val!;
+                                      condition[2].isChecked = false;
+                                      print('1');
+                                    } else if (index == 2) {
+                                      condition[0].isChecked = false;
+                                      condition[1].isChecked = false;
+                                      condition[2].isChecked = val!;
+                                      print('2');
+                                    }
+                                  });
+                                },
+                                activeColor: Colors.white,
+                                checkColor: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                color: Color.fromRGBO(152, 152, 152, 0.11),
+                width: (MediaQuery.of(context).size.width * 1),
+                child: Text(
+                  'Tahun Produk',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 5, right: 40, bottom: 5),
+                // color: Colors.amber,
+                // alignment: Alignment.center,
+                child: ListView.separated(
+                  padding: EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  separatorBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) =>
+                      Divider(
+                    height: 0,
+                  ),
+                  itemCount: productYear.length,
+                  itemBuilder: (context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(
+                            bottom: 10,
+                            left: 25,
+                          ),
+                          child: Text(
+                            productYear[index].title,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(2)),
+                            // color: Colors.amber,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                          ),
+                          height: 18,
+                          width: 18,
+                          // color: Colors.amber,
+                          child: Transform.scale(
+                            scale: 0.7,
+                            child: Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white),
+                              child: Checkbox(
+                                value: productYear[index].isChecked,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    productYear[index].isChecked = val!;
+                                  });
+                                },
+                                activeColor: Colors.white,
+                                checkColor: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildButtonBersihkan(),
+                  buildButtonTerapkan(),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Kategori {
+  late String title;
+  late bool isChecked;
+
+  Kategori({
+    required this.title,
+    required this.isChecked,
+  });
+}
+
+class Kondisi {
+  late String title;
+  late bool isChecked;
+
+  Kondisi({
+    required this.title,
+    required this.isChecked,
+  });
+}
+
+class TahunProduk {
+  late String title;
+  late bool isChecked;
+
+  TahunProduk({
+    required this.title,
+    required this.isChecked,
+  });
 }
