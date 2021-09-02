@@ -56,6 +56,24 @@ class _UserPageState extends State<UserPage> {
   bool menuDataDiri = true;
   bool menuHistory = false;
 
+  Widget backButton() {
+    return Container(
+      // padding: EdgeInsets.only(bottom: 5),
+      alignment: Alignment.topLeft,
+      child: IconButton(
+        icon: Icon(
+          Icons.chevron_left,
+        ),
+        iconSize: 50,
+        color: Colors.black,
+        onPressed: () {
+          Navigator.pop(context);
+          print('Back Button');
+        },
+      ),
+    );
+  }
+
   Widget userAccount() {
     double _size = 85;
     return GestureDetector(
@@ -216,7 +234,7 @@ class _UserPageState extends State<UserPage> {
     ]);
   }
 
-  Widget jurAndFakUser(String text) {
+  Widget jurAndFakUser(String text) { 
     return Row(children: [
       Container(
         child: Icon(
@@ -398,6 +416,7 @@ class _UserPageState extends State<UserPage> {
   List<IconData> icons = [Icons.person, Icons.home, Icons.notifications];
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFF9559),
@@ -406,11 +425,11 @@ class _UserPageState extends State<UserPage> {
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
-
               // Bagian atas (Foto,Nama Edit)
+              backButton(),
               Container(
                 width: 375,
-                padding: EdgeInsets.symmetric(vertical: 50),
+                // padding: EdgeInsets.symmetric(vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -420,6 +439,7 @@ class _UserPageState extends State<UserPage> {
                   ],
                 ),
               ),
+              SizedBox(height: 35),
               Container(
                 child: ClipRRect(
                   // borderRadius: BorderRadius.circular(50.0),
