@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
 import 'package:inventory_app/page/detail/proses.dart';
+import 'package:inventory_app/page/rekapData.dart';
 import 'package:inventory_app/page/user/userPage.dart';
 
 import 'detail/dataPinjam.dart';
@@ -988,6 +989,10 @@ class _HalamanUtamaState extends State<HalamanUtama> {
         //   context,
         //   MaterialPageRoute(builder: (context) => DetailBarangDipinjam()),
         // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RekapData()),
+        );
       },
       child: Container(
         // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
