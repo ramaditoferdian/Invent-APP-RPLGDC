@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
 import 'package:inventory_app/page/detail/dataPinjam.dart';
+import 'package:inventory_app/page/detailBarangUser.dart';
 import 'package:inventory_app/page/halamanUtama.dart';
 import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
