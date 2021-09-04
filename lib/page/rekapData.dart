@@ -34,109 +34,110 @@ class _RekapDataState extends State<RekapData> {
   }
 
   Widget dataRekap(String gambar, nama, kodeUnit, int denda) {
-    return Column(
-      children: [
-        Container(
-            color: Colors.white,
-            height: 125,
-            child: Row(
-              children: [
-                // Gambar
-                SizedBox(width: 10),
-                Container(
-                  child: Image.asset(
-                    '$gambar',
-                    width: 80,
-                    height: 100,
-                    fit: BoxFit.contain,
-                  ),
+    return GestureDetector(
+      onTap: (){
+        print("Detail Barang Data Rekap");
+      },
+      child: Container(
+          color: Colors.white,
+          height: 125,
+          child: Row(
+            children: [
+              // Gambar
+              SizedBox(width: 10),
+              Container(
+                child: Image.asset(
+                  '$gambar',
+                  width: 80,
+                  height: 100,
+                  fit: BoxFit.contain,
                 ),
-                // Nama dan Detail
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 15),
-                      // Nama Barang
-                      Container(
-                        child: Text(
-                          '$nama',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.roboto(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+              ),
+              // Nama dan Detail
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 15),
+                    // Nama Barang
+                    Container(
+                      child: Text(
+                        '$nama',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    // Detail Barang
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Kode Unit',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black.withOpacity(0.5)),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                '$kodeUnit',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      // Detail Barang
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Kode Unit',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black.withOpacity(0.5)),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  '$kodeUnit',
-                                  style: GoogleFonts.poppins(
+                          SizedBox(width: 15),
+                          verDiv(40, Color(0xFFFFC28A)),
+                          SizedBox(width: 15),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Denda',
+                                style: GoogleFonts.poppins(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(width: 15),
-                            verDiv(40, Color(0xFFFFC28A)),
-                            SizedBox(width: 15),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Denda',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black.withOpacity(0.5)),
+                                    color: Colors.black.withOpacity(0.5)),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                'Rp $denda',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  'Rp $denda',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            )),
-      ],
+              ),
+            ],
+          )),
     );
   }
 
