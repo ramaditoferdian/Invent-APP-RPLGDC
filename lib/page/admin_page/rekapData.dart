@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/page/detail/detailRekap.dart';
+
+import 'detail/detailRekap.dart';
 
 class RekapData extends StatefulWidget {
   const RekapData({Key? key}) : super(key: key);
