@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/user/editUser.dart';
 
 class UserPage extends StatefulWidget {
@@ -20,41 +23,343 @@ class _UserPageState extends State<UserPage> {
       fakultas: 'FIF',
     ),
   ];
-  
+
   List<DataPinjam> listHistoryBarang = [
     DataPinjam(
-      gambar : 'images/laptop_asus.png',
-      nama : 'Asus VivoBook S14',
-      kodeUnit : 'AVD14-1',
-      tanggal : '12/05/01',
-      oleh : 'Falia',
-      status: 'Pinjam',
-      warna: Color(0xFF2EDE8A)
-    ),
+        gambar: 'images/laptop_asus.png',
+        nama: 'Asus VivoBook S14',
+        kodeUnit: 'AVD14-1',
+        tanggal: '12/05/01',
+        oleh: 'Falia',
+        status: 'Pinjam',
+        warna: Color(0xFF2EDE8A)),
     DataPinjam(
-      gambar : 'images/whiteboard.jpg',
-      nama : 'Whiteboard',
-      kodeUnit : 'AVS14-1',
-      tanggal : '10/04/21',
-      oleh : 'Falia',
-      status: 'Kembali',
-      warna : Color(0xFFC4C4C4)
-    ),
+        gambar: 'images/whiteboard.jpg',
+        nama: 'Whiteboard',
+        kodeUnit: 'AVS14-1',
+        tanggal: '10/04/21',
+        oleh: 'Falia',
+        status: 'Kembali',
+        warna: Color(0xFFC4C4C4)),
     DataPinjam(
-      gambar : 'images/wacom.png',
-      nama : 'Tablet Wacom Intous',
-      kodeUnit : 'PTWI-11',
-      tanggal : '12/05/01',
-      oleh : 'Aliya',
-      status: 'Kembali',
-      warna : Color(0xFFC4C4C4)
-    )
+        gambar: 'images/wacom.png',
+        nama: 'Tablet Wacom Intous',
+        kodeUnit: 'PTWI-11',
+        tanggal: '12/05/01',
+        oleh: 'Aliya',
+        status: 'Kembali',
+        warna: Color(0xFFC4C4C4))
   ];
-  
+
   // =========================================== //
   bool isClicked = true;
   bool menuDataDiri = true;
   bool menuHistory = false;
+
+  void showDialogLogOut() {
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.25),
+      transitionDuration: Duration(milliseconds: 300),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return showConfirmLogOut();
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 1 * anim.value,
+              sigmaY: 1 * anim.value,
+            ),
+            child: SlideTransition(
+              position:
+                  Tween(begin: Offset(0, 0), end: Offset(0, 0)).animate(anim),
+              child: child,
+            ));
+      },
+    );
+  }
+
+  void showDialogInformation() {
+    showGeneralDialog(
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.25),
+      transitionDuration: Duration(milliseconds: 300),
+      context: context,
+      pageBuilder: (_, __, ___) {
+        return showInformation();
+      },
+      transitionBuilder: (_, anim, __, child) {
+        return BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 1 * anim.value,
+              sigmaY: 1 * anim.value,
+            ),
+            child: SlideTransition(
+              position:
+                  Tween(begin: Offset(0, 0), end: Offset(0, 0)).animate(anim),
+              child: child,
+            ));
+      },
+    );
+  }
+
+  Widget showInformation() {
+    double _height = 325;
+    double _width = 300;
+    return SafeArea(
+      child: Material(
+        type: MaterialType.transparency,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: _height,
+              width: _width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: _width,
+                    padding: EdgeInsets.only(left: 10, top: 15, bottom: 15),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.close,
+                          size: 25,
+                        ),
+                        SizedBox(
+                          width: (_width / 4 - 25),
+                        ),
+                        Center(
+                          child: Text(
+                            'INFORMASI',
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 23,
+                              color: Color(0xFFCB2500),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(12),
+                      ),
+                      color: Color(0xFFFFB674),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      'Apakah anda yakin ingin keluar?',
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget showConfirmLogOut() {
+    double _height = 160;
+    double _width = 300;
+    return SafeArea(
+      child: Material(
+        type: MaterialType.transparency,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: _height,
+              width: _width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: _width,
+                    padding: EdgeInsets.only(left: 10, top: 15, bottom: 15),
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          'Log Out',
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 23,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(12),
+                      ),
+                      color: Color(0xFFFFB674),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      'Apakah anda yakin ingin keluar?',
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildButtonBatalLogOut(),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      buildButtonLogout2(),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildButtonBatalLogOut() {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        print('Batal');
+      },
+      child: Container(
+        height: 25,
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: Color(0xFFE4E4E4),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: Center(
+          child: Text(
+            'Batal',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildButtonLogout2() {
+    return InkWell(
+      onTap: () {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => LoginPage(),
+          ),
+          (route) => false,
+        );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => LoginPage(),
+          ),
+          (route) => false,
+        );
+        print('Berhasil Login');
+        print('Log Out Fix');
+      },
+      child: Container(
+        height: 25,
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: Color(0xFFEA340C),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: Center(
+          child: Text(
+            'Log Out',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildButtonLogout() {
+    return InkWell(
+      onTap: () {
+        // showDialogLogOut();
+        showDialogInformation();
+        print('Log Out');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: Color(0xFFE4E4E4),
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 7,
+          horizontal: 50,
+        ),
+        child: Text(
+          'Log Out',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.w400,
+            fontSize: 23,
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget backButton() {
     return Container(
@@ -106,7 +411,8 @@ class _UserPageState extends State<UserPage> {
     return OutlinedButton(
       onPressed: () {
         print("Edit User");
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditUser()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => EditUser()));
       },
       style: OutlinedButton.styleFrom(
           primary: Colors.white,
@@ -188,12 +494,10 @@ class _UserPageState extends State<UserPage> {
   Widget verDiv(double height, Color warna) {
     return Container(
       height: height,
-      child: VerticalDivider(
-          thickness: 1,
-          color: warna),
+      child: VerticalDivider(thickness: 1, color: warna),
     );
   }
-  
+
   Widget emailUser(String text) {
     return Row(children: [
       Container(
@@ -234,7 +538,7 @@ class _UserPageState extends State<UserPage> {
     ]);
   }
 
-  Widget jurAndFakUser(String text) { 
+  Widget jurAndFakUser(String text) {
     return Row(children: [
       Container(
         child: Icon(
@@ -277,134 +581,138 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget untukSatuBarang (String gambar,nama,kode,tanggal,oleh,status, Color warna) {
+  Widget untukSatuBarang(
+      String gambar, nama, kode, tanggal, oleh, status, Color warna) {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
-          height: 125,
-          child: Row(
-            children: [
-              // Gambar 
-              Container(
-                child: Image.asset(
-                  '$gambar',
-                  width: 80,
-                  height: 100,
-                  fit: BoxFit.contain,
+            margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
+            height: 125,
+            child: Row(
+              children: [
+                // Gambar
+                Container(
+                  child: Image.asset(
+                    '$gambar',
+                    width: 80,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-              // Nama dan Detail
-              SizedBox(
-                width: 5,
-              ),
-              Container(
-                width: 225,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 15
-                    ),
-                    // Nama Barang
-                    Container(
-                      child: Text(
-                        '$nama',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.roboto(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
+                // Nama dan Detail
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  width: 225,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15),
+                      // Nama Barang
+                      Container(
+                        child: Text(
+                          '$nama',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.roboto(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // Detail Barang
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Text('Kode Unit',
-                              style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black.withOpacity(0.5)
-                                ),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text('$kode',
-                                style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                ),)
-                            ],
-                          ),
-                          verDiv(40,Color(0xFFFFC28A)),
-                          Column(
-                            children: [
-                              Text('Tanggal',
-                              style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black.withOpacity(0.5)
-                                ),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text('$tanggal',
-                                style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                ),)
-                            ],
-                          ),
-                          verDiv(40,Color(0xFFFFC28A)),
-                          Column(
-                            children: [
-                              Text('Oleh',
-                              style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black.withOpacity(0.5)
-                                ),
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text('$oleh',
-                                style: GoogleFonts.poppins(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                ),)
-                            ],
-                          ),
-                        ],
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ],
+                      // Detail Barang
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  'Kode Unit',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$kode',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            verDiv(40, Color(0xFFFFC28A)),
+                            Column(
+                              children: [
+                                Text(
+                                  'Tanggal',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$tanggal',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            verDiv(40, Color(0xFFFFC28A)),
+                            Column(
+                              children: [
+                                Text(
+                                  'Oleh',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.5)),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '$oleh',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 72),
-                child: Text (' $status ') ,
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 0, 0, 72),
+                  child: Text(' $status '),
                   decoration: BoxDecoration(
                     color: warna,
                     border: Border.all(
-                          color: warna ,
-                          width: 2.0 ,
-                        ),
+                      color: warna,
+                      width: 2.0,
+                    ),
                     borderRadius: BorderRadius.circular(15),
-                      ),
+                  ),
                 ),
-            ],
-          )
-        ),
+              ],
+            )),
         Divider(
           color: Colors.grey,
           height: 1,
@@ -416,15 +724,14 @@ class _UserPageState extends State<UserPage> {
   List<IconData> icons = [Icons.person, Icons.home, Icons.notifications];
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFF9559),
-          body: SafeArea(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Column(
-          children: [
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
               // Bagian atas (Foto,Nama Edit)
               backButton(),
               Container(
@@ -459,7 +766,7 @@ class _UserPageState extends State<UserPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               personKecilIcon(),
-                              verDiv(60,Colors.grey),
+                              verDiv(60, Colors.grey),
                               historyItemIcon()
                             ],
                           ),
@@ -479,10 +786,12 @@ class _UserPageState extends State<UserPage> {
                                 child: Container(
                                   margin: EdgeInsets.fromLTRB(40, 30, 15, 0),
                                   child: ListView.separated(
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
-                                    separatorBuilder: (BuildContext context, int index) =>
-                                        Divider(
+                                    separatorBuilder:
+                                        (BuildContext context, int index) =>
+                                            Divider(
                                       color: Colors.grey,
                                       thickness: 0.5,
                                     ),
@@ -501,28 +810,29 @@ class _UserPageState extends State<UserPage> {
                               Visibility(
                                 visible: menuHistory,
                                 child: ListView.separated(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    separatorBuilder: (BuildContext context, int index) =>
-                                        Divider(
-                                          height: 0,
-                                    ),
-                                    itemCount: listHistoryBarang.length,
-                                    itemBuilder: (context, int index) {
-                                      return untukSatuBarang(
-                                        listHistoryBarang[index].gambar,
-                                        listHistoryBarang[index].nama,
-                                        listHistoryBarang[index].kodeUnit,
-                                        listHistoryBarang[index].tanggal,
-                                        listHistoryBarang[index].oleh,
-                                        listHistoryBarang[index].status,
-                                        listHistoryBarang[index].warna,
-                                      );
-                                    },
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          Divider(
+                                    height: 0,
                                   ),
+                                  itemCount: listHistoryBarang.length,
+                                  itemBuilder: (context, int index) {
+                                    return untukSatuBarang(
+                                      listHistoryBarang[index].gambar,
+                                      listHistoryBarang[index].nama,
+                                      listHistoryBarang[index].kodeUnit,
+                                      listHistoryBarang[index].tanggal,
+                                      listHistoryBarang[index].oleh,
+                                      listHistoryBarang[index].status,
+                                      listHistoryBarang[index].warna,
+                                    );
+                                  },
+                                ),
                               )
-                          ],
-                        ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -532,6 +842,19 @@ class _UserPageState extends State<UserPage> {
                 height: 625,
                 // height: MediaQuery.of(context).size.height,
               ),
+            ],
+          ),
+        ),
+      ),
+      bottomSheet: Visibility(
+        visible: menuDataDiri,
+        child: Container(
+          color: Colors.transparent,
+          height: 100,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              buildButtonLogout(),
             ],
           ),
         ),
@@ -552,7 +875,7 @@ class DataDiri {
 }
 
 class DataPinjam {
-  late String gambar, nama, kodeUnit, tanggal, oleh,status;
+  late String gambar, nama, kodeUnit, tanggal, oleh, status;
   Color warna;
   DataPinjam({
     required this.gambar,
@@ -564,4 +887,3 @@ class DataPinjam {
     required this.warna,
   });
 }
-

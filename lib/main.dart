@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
-import 'package:inventory_app/page/detail/dataPinjam.dart';
+import 'package:inventory_app/page/detail/detailBarangDipinjam.dart';
+import 'package:inventory_app/page/detail/detailProsesBarang.dart';
+import 'package:inventory_app/page/detail/detailRekap.dart';
 import 'package:inventory_app/page/halamanUtama.dart';
 import 'package:inventory_app/page/loginPage.dart';
 import 'package:inventory_app/page/registerPage.dart';
@@ -9,6 +11,9 @@ import 'package:inventory_app/page/rekapData.dart';
 import 'package:inventory_app/page/user/editUser.dart';
 import 'package:inventory_app/page/user/userPage.dart';
 
+ThemeData _baseTheme = ThemeData(
+  canvasColor: Colors.white,
+);
 Future<void> main() async {
   // Untuk Lock Orientation
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
       home: HalamanUtama(),
+      theme: _baseTheme,
     );
   }
 }

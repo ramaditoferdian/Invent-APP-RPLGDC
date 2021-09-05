@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/page/detail/detailBarang.dart';
-import 'package:inventory_app/page/detail/proses.dart';
+import 'package:inventory_app/page/detail/detailProsesBarang.dart';
 import 'package:inventory_app/page/rekapData.dart';
 import 'package:inventory_app/page/user/userPage.dart';
 
-import 'detail/dataPinjam.dart';
+import 'detail/detailBarangDipinjam.dart';
 
 class HalamanUtama extends StatefulWidget {
   const HalamanUtama({Key? key}) : super(key: key);
@@ -1067,6 +1067,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: Stack(
@@ -1235,38 +1236,34 @@ class _HalamanUtamaState extends State<HalamanUtama> {
             ],
           ),
         ),
-        floatingActionButton: Visibility(
-          // Tamplikan Ketika berada pada Menu Data Barang
-          visible: menu1,
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 5,
-                  blurRadius: 20,
-                  offset: Offset(1, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            height: 55,
-            child: OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  print("FAB");
-                  showDialogFaB();
-                });
-              },
-              style: OutlinedButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.white,
-                  side: BorderSide(width: 1.5, color: Colors.black),
-                  shape: CircleBorder()),
-              child: Icon(
-                Icons.menu,
-                color: Colors.black,
-                size: 30,
+        floatingActionButton: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 5,
+                blurRadius: 20,
+                offset: Offset(1, 3), // changes position of shadow
               ),
+            ],
+          ),
+          height: 55,
+          child: OutlinedButton(
+            onPressed: () {
+              setState(() {
+                print("FAB");
+                showDialogFaB();
+              });
+            },
+            style: OutlinedButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: Colors.white,
+                side: BorderSide(width: 1.5, color: Colors.black),
+                shape: CircleBorder()),
+            child: Icon(
+              Icons.menu,
+              color: Colors.black,
+              size: 30,
             ),
           ),
         ));
