@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/page/detail/detailRekap.dart';
 
 class RekapData extends StatefulWidget {
   const RekapData({Key? key}) : super(key: key);
@@ -36,6 +37,11 @@ class _RekapDataState extends State<RekapData> {
   Widget dataRekap(String gambar, nama, kodeUnit, int denda) {
     return GestureDetector(
       onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DetailRekap(),
+          ),
+        );
         print("Detail Barang Data Rekap");
       },
       child: Container(

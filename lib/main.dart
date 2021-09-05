@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/page/detail/detailBarang.dart';
-import 'package:inventory_app/page/detail/dataPinjam.dart';
-import 'package:inventory_app/page/detailBarangUser.dart';
-import 'package:inventory_app/page/halamanUtama.dart';
-import 'package:inventory_app/page/loginPage.dart';
-import 'package:inventory_app/page/registerPage.dart';
+
 import 'package:flutter/services.dart';
-import 'package:inventory_app/page/rekapData.dart';
-import 'package:inventory_app/page/user/editUser.dart';
-import 'package:inventory_app/page/user/userPage.dart';
+import 'package:inventory_app/page/admin_page/halamanUtamaAdmin.dart';
+import 'package:inventory_app/page/guest_page/halamanUtamaGuest.dart';
+import 'package:inventory_app/page/loginPage.dart';
+import 'package:inventory_app/page/user_page/detailBarangUser.dart';
+import 'package:inventory_app/page/user_page/halamanUtamaUser.dart';
 
 ThemeData _baseTheme = ThemeData(
   canvasColor: Colors.white,
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Invent APP',
-      home: HalamanUtama(),
+      home: HalamanUtamaUser(),
       theme: _baseTheme,
     );
   }

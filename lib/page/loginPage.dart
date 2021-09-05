@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/page/halamanUtama.dart';
+import 'package:inventory_app/page/admin_page/halamanUtamaAdmin.dart';
+import 'package:inventory_app/page/guest_page/halamanUtamaGuest.dart';
 import 'package:inventory_app/page/registerPage.dart';
+import 'package:inventory_app/page/user_page/halamanUtamaUser.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -123,15 +125,24 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 print('Login Pressed');
 
-                if (salahPassword == true) {
+                if (fieldTextEmailLog.text == '' &&
+                    fieldTextPasswordLog.text == '') {
                   showDialog(context: context, builder: (_) => ImageDialog());
                   print('Salah Password');
-                } else {
+                } else if (fieldTextEmailLog.text == 'user' &&
+                    fieldTextPasswordLog.text == '123456') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HalamanUtama()),
+                    MaterialPageRoute(builder: (context) => HalamanUtamaUser()),
                   );
                   print('Berhasil Login');
+                } else if (fieldTextEmailLog.text == 'admin' &&
+                    fieldTextPasswordLog.text == '123456') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HalamanUtamaAdmin()),
+                  );
                 }
               },
               child: Text(
@@ -201,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HalamanUtama()),
+                  MaterialPageRoute(builder: (context) => HalamanUtamaGuest()),
                 );
               },
               child: Text(
