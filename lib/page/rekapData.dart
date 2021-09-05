@@ -34,11 +34,13 @@ class _RekapDataState extends State<RekapData> {
   }
 
   Widget dataRekap(String gambar, nama, kodeUnit, int denda) {
+
     return GestureDetector(
       onTap: (){
         print("Detail Barang Data Rekap");
       },
       child: Container(
+
           color: Colors.white,
           height: 125,
           child: Row(
@@ -137,7 +139,9 @@ class _RekapDataState extends State<RekapData> {
                 ),
               ),
             ],
+
           )),
+
     );
   }
 
