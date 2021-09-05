@@ -6,18 +6,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/page/detail/detailBarang.dart';
-import 'package:inventory_app/page/detail/detailProsesBarang.dart';
-import 'package:inventory_app/page/rekapData.dart';
-import 'package:inventory_app/page/user/userPage.dart';
+import 'package:inventory_app/page/admin_page/detail/detailBarang.dart';
+import 'package:inventory_app/page/admin_page/detail/detailProsesBarang.dart';
+import 'package:inventory_app/page/admin_page/rekapData.dart';
+import 'package:inventory_app/page/admin_page/user/userPage.dart';
 
 import 'detail/detailBarangDipinjam.dart';
 
-class HalamanUtama extends StatefulWidget {
-  const HalamanUtama({Key? key}) : super(key: key);
+class HalamanUtamaAdmin extends StatefulWidget {
+  const HalamanUtamaAdmin({Key? key}) : super(key: key);
 
   @override
-  _HalamanUtamaState createState() => _HalamanUtamaState();
+  _HalamanUtamaAdminState createState() => _HalamanUtamaAdminState();
 }
 
 bool isClicked = true;
@@ -26,7 +26,7 @@ bool menu2 = false;
 bool menu3 = false;
 bool menu4 = false;
 
-class _HalamanUtamaState extends State<HalamanUtama> {
+class _HalamanUtamaAdminState extends State<HalamanUtamaAdmin> {
   late ScrollController controller;
 
   @override
@@ -104,60 +104,54 @@ class _HalamanUtamaState extends State<HalamanUtama> {
   List<Barang> dataBarang = [
     Barang(
       name: 'Mouse Logitech LM145',
-      condition: 'Elektronikkkkkkkkkkk',
+      condition: 'Elektronik',
       amount: '1000000000',
       image: 'images/mouse.png',
     ),
     Barang(
-      name: 'Keyboard Razer xxxxxxxx sad a as ',
+      name: 'Keyboard Razer',
       condition: 'Elektronik',
       amount: '10',
-      image: 'images/mouse.png',
+      image: 'images/keyboard-razer.png',
     ),
     Barang(
-      name: 'Mouse Logitech LM145',
+      name: 'Mouse ROG',
       condition: 'Elektronik',
       amount: '10',
-      image: 'images/mouse.png',
+      image: 'images/mouse2.png',
     ),
     Barang(
-      name: 'Mouse Logitech LM145',
+      name: 'Tablet Wacom Intous',
       condition: 'Elektronik',
       amount: '10',
-      image: 'images/mouse.png',
+      image: 'images/wacom.png',
     ),
     Barang(
-      name: 'Mouse Logitech LM145',
-      condition: 'Elektronik',
+      name: 'Papan Tulis',
+      condition: 'Prasarana',
       amount: '10',
-      image: 'images/mouse.png',
+      image: 'images/whiteboard.jpg',
     ),
     Barang(
-      name: 'Mouse Logitech LM145',
+      name: 'Asus VivoBook S14',
       condition: 'Elektronik',
       amount: '10',
-      image: 'images/mouse.png',
-    ),
-    Barang(
-      name: 'Mouse Logitech LM145',
-      condition: 'Elektronik',
-      amount: '10',
-      image: 'images/mouse.png',
+      image: 'images/laptop_asus.png',
     ),
   ];
 
   List<Item> barangDipinjam = [
     Item(
-      name: 'Mouse Logitech LM145 dasd asd asd as da',
+      name: 'Mouse Logitech LM145',
       unit_code: 'LM145-1',
       borrower: 'Raihan',
       image: 'images/mouse.png',
     ),
     Item(
-      name: 'Mouse Logitech LM145 dasd asd asd as da',
-      unit_code: 'LM145-1',
-      borrower: 'Raihan',
-      image: 'images/mouse.png',
+      name: 'Asus VivoBook S14',
+      unit_code: 'LAVS14-1',
+      borrower: 'Adi',
+      image: 'images/laptop_asus.png',
     ),
   ];
 
@@ -574,7 +568,7 @@ class _HalamanUtamaState extends State<HalamanUtama> {
                   children: <Widget>[
                     Container(
                       width: 230,
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: EdgeInsets.only(bottom: 20),
                       //color: Colors.amber,
                       child: Text(
                         // 'Mouse Logitech LM145',

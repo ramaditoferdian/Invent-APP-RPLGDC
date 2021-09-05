@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/page/loginPage.dart';
-import 'package:inventory_app/page/user/editUser.dart';
+import 'package:inventory_app/page/admin_page/user/editUser.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -78,102 +78,6 @@ class _UserPageState extends State<UserPage> {
               child: child,
             ));
       },
-    );
-  }
-
-  void showDialogInformation() {
-    showGeneralDialog(
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.25),
-      transitionDuration: Duration(milliseconds: 300),
-      context: context,
-      pageBuilder: (_, __, ___) {
-        return showInformation();
-      },
-      transitionBuilder: (_, anim, __, child) {
-        return BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 1 * anim.value,
-              sigmaY: 1 * anim.value,
-            ),
-            child: SlideTransition(
-              position:
-                  Tween(begin: Offset(0, 0), end: Offset(0, 0)).animate(anim),
-              child: child,
-            ));
-      },
-    );
-  }
-
-  Widget showInformation() {
-    double _height = 325;
-    double _width = 300;
-    return SafeArea(
-      child: Material(
-        type: MaterialType.transparency,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: _height,
-              width: _width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    width: _width,
-                    padding: EdgeInsets.only(left: 10, top: 15, bottom: 15),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.close,
-                          size: 25,
-                        ),
-                        SizedBox(
-                          width: (_width / 4 - 25),
-                        ),
-                        Center(
-                          child: Text(
-                            'INFORMASI',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 23,
-                              color: Color(0xFFCB2500),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(12),
-                      ),
-                      color: Color(0xFFFFB674),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      'Apakah anda yakin ingin keluar?',
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -335,7 +239,7 @@ class _UserPageState extends State<UserPage> {
     return InkWell(
       onTap: () {
         // showDialogLogOut();
-        showDialogInformation();
+        showDialogLogOut();
         print('Log Out');
       },
       child: Container(
