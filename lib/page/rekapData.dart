@@ -34,9 +34,13 @@ class _RekapDataState extends State<RekapData> {
   }
 
   Widget dataRekap(String gambar, nama, kodeUnit, int denda) {
-    return Column(
-      children: [
-        Container(
+
+    return GestureDetector(
+      onTap: (){
+        print("Detail Barang Data Rekap");
+      },
+      child: Container(
+
           color: Colors.white,
           height: 125,
           child: Row(
@@ -135,15 +139,16 @@ class _RekapDataState extends State<RekapData> {
                 ),
               ),
             ],
-          ),
-        ),
-      ],
+
+          )),
+
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF3F3F3),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -165,32 +170,32 @@ class _RekapDataState extends State<RekapData> {
             preferredSize: Size.fromHeight(0)),
         elevation: 0,
       ),
-      body: Container(
-          color: Color(0xFFF3F3F3),
-          child: Column(
-            children: [
-              Container(
-                child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    color: Color(0xFFF3F3F3),
-                    height: 1,
-                  ),
-                  itemCount: listBarangRekap.length,
-                  itemBuilder: (context, int index) {
-                    return dataRekap(
-                      listBarangRekap[index].gambar,
-                      listBarangRekap[index].nama,
-                      listBarangRekap[index].kodeUnit,
-                      listBarangRekap[index].denda,
-                    );
-                  },
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            Container(
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (BuildContext context, int index) => Divider(
+                  color: Color(0xFFF3F3F3),
+                  height: 1,
                 ),
-              )
-            ],
-          )),
+                itemCount: listBarangRekap.length,
+                itemBuilder: (context, int index) {
+                  return dataRekap(
+                    listBarangRekap[index].gambar,
+                    listBarangRekap[index].nama,
+                    listBarangRekap[index].kodeUnit,
+                    listBarangRekap[index].denda,
+                  );
+                },
+              ),
+            )
+          ],
+        )),
+      ),
     );
   }
 }
