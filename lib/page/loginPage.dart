@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/page/halamanUtama.dart';
+import 'package:inventory_app/page/admin_page/halamanUtamaAdmin.dart';
+import 'package:inventory_app/page/guest_page/halamanUtamaGuest.dart';
 import 'package:inventory_app/page/registerPage.dart';
+import 'package:inventory_app/page/user_page/halamanUtamaUser.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final fieldTextEmailLog = TextEditingController();
   final fieldTextPasswordLog = TextEditingController();
+
+  bool salahPassword = true;
 
   Widget buildEmail() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
@@ -82,18 +87,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      // ignore: deprecated_member_use
-      child: FlatButton(
-        onPressed: () => print('Forgot Password pressed!'),
-        padding: EdgeInsets.only(right: 30),
+    return GestureDetector(
+      onTap: () => print('Forgot Password pressed!'),
+      child: Container(
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.only(right: 30, top: 15, bottom: 20),
         child: Text(
           'Forgot password?',
           style: GoogleFonts.poppins(
-              color: Colors.black, fontSize: 12, fontWeight: FontWeight.w300
-              // fontWeight: FontWeight.
-              ),
+            color: Colors.black, fontSize: 12, fontWeight: FontWeight.w400,
+            // fontWeight: FontWeight.
+          ),
         ),
       ),
     );
@@ -121,10 +125,25 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 print('Login Pressed');
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HalamanUtama()),
-                );
+                if (fieldTextEmailLog.text == '' &&
+                    fieldTextPasswordLog.text == '') {
+                  showDialog(context: context, builder: (_) => ImageDialog());
+                  print('Salah Password');
+                } else if (fieldTextEmailLog.text == 'user' &&
+                    fieldTextPasswordLog.text == '123456') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HalamanUtamaUser()),
+                  );
+                  print('Berhasil Login');
+                } else if (fieldTextEmailLog.text == 'admin' &&
+                    fieldTextPasswordLog.text == '123456') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HalamanUtamaAdmin()),
+                  );
+                }
               },
               child: Text(
                 'Login',
@@ -160,10 +179,53 @@ class _LoginPageState extends State<LoginPage> {
           TextSpan(
               text: 'Sign Up',
               style: GoogleFonts.poppins(
-                  color: Color.fromRGBO(0, 0, 0, 0.84),
+                  color: Color.fromRGBO(132, 40, 0, 1),
                   fontSize: 15,
                   fontWeight: FontWeight.bold))
         ]),
+      ),
+    );
+  }
+
+  Widget buildLoginAsGuest() {
+    return Container(
+      // margin: EdgeInsets.fromLTRB(0, 40, 20, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            height: 1.2 * (MediaQuery.of(context).size.height / 20),
+            width: 5 * (MediaQuery.of(context).size.width / 10),
+            margin: EdgeInsets.only(bottom: 20),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: Color.fromRGBO(255, 179, 135, 1),
+                side: BorderSide(
+                    width: 2, color: Color.fromRGBO(255, 179, 135, 1)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+              ),
+              onPressed: () {
+                print('Login Pressed');
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HalamanUtamaGuest()),
+                );
+              },
+              child: Text(
+                'Login as Guest',
+                style: GoogleFonts.poppins(
+                    color: Colors.black.withOpacity(0.47),
+                    letterSpacing: 1.5,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -174,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
         Radius.circular(15),
       ),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.385,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -189,8 +251,8 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             buildEmail(),
-            SizedBox(
-              height: 20,
+            Divider(
+              color: Colors.black.withOpacity(0),
             ),
             buildPassword(),
             buildForgotPasswordBtn(),
@@ -204,53 +266,64 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: GestureDetector(
-          child: Stack(
-        children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color(0xFFFF9F69),
-                    Color(0x79FFB183),
-                  ])),
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 100),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFFF9F69),
+                Color(0x79FFB183),
+              ],
+            ),
+          ),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 100),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Login',
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Column(
                   children: <Widget>[
-                    Text(
-                      'Login',
-                      style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
+                    buildAll(),
+                    Divider(
+                      color: Colors.black.withOpacity(0),
                       height: 50,
                     ),
-                    Column(
-                      children: <Widget>[
-                        buildAll(),
-                        SizedBox(
-                          height:
-                              4.5 * (MediaQuery.of(context).size.height / 20),
-                        ),
-                        buildSignUpBtn()
-                      ],
+                    buildLoginAsGuest(),
+                    Divider(
+                      color: Colors.black.withOpacity(0),
+                      height: 70,
                     ),
+                    buildSignUpBtn()
                   ],
                 ),
-              )),
-        ],
-      )),
-    ));
+              ],
+            ),
+          )),
+    );
+  }
+}
+
+class ImageDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Image.asset(
+        'assets/AttentionLogin.png',
+      ),
+    );
   }
 }
